@@ -1,185 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title> 4q-u4 - Home </title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Cybersecurity" name="keywords">
-        <meta content="This is a blog about cybersecurity research" name="description">
-        <!-- Favicon -->
-        <link href="img/favicon.ico" rel="icon">
-        <!-- Google Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:300;400;600;700;800&display=swap" rel="stylesheet">
-        <!-- Font Awesome -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-    </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dan Madi</title>
+  <meta name="description" content="Dan Madi — engineer building AI systems, automation, and modern software products." />
+  <meta property="og:title" content="Dan Madi" />
+  <meta property="og:description" content="Engineer building AI systems, automation, and modern software products." />
+  <meta property="og:type" content="website" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-white text-zinc-900 antialiased">
+  <div class="mx-auto max-w-6xl px-6 py-10 lg:px-10">
+    <div class="grid gap-12 lg:grid-cols-[240px_minmax(0,1fr)]">
+      <aside class="lg:sticky lg:top-10 lg:self-start">
+        <a href="#top" class="text-xl font-semibold tracking-tight">Dan Madi</a>
+        <nav class="mt-8 space-y-3 text-sm text-zinc-600">
+          <a href="#about" class="block hover:text-black">About</a>
+          <a href="#projects" class="block hover:text-black">Projects</a>
+          <a href="#experience" class="block hover:text-black">Experience</a>
+          <a href="#notes" class="block hover:text-black">Notes</a>
+          <a href="#contact" class="block hover:text-black">Contact</a>
+        </nav>
 
-    <body>
-        <div class="wrapper">
-            <div class="sidebar">
-                <div class="sidebar-text d-flex flex-column h-100 justify-content-center text-center">
-                    <img class="mx-auto d-block w-75 bg-primary img-fluid rounded-circle mb-4 p-3" src="img/profile.jpg" alt="Image">
-                    <h1 class="font-weight-bold">Daniel</h1>
-                    <p class="mb-4">
-                        A curated collection of projects, research, and accomplishments about Cybersecurity                   </p>
-                    <div class="d-flex justify-content-center mb-5">
-                        <a class="btn btn-outline-primary mr-2" href="https://x.com/itisdaniell"><i class="fab fa-twitter"></i>                        </a>
-                        <a class="btn btn-outline-primary mr-2" href="https://github.com/4q-u4"><i class="fab fa-github"></i></a>
-                        <a class="btn btn-outline-primary mr-2" href="https://dev.to/4q-u4"><i class="fa-brands fa-dev"></i></a>
-                        <a class="btn btn-outline-primary mr-2" href="#"><i class="fa fa-envelope"></i></a>
-                    </div>
-                    <a href="http://t.me/Aq_u4" class="btn btn-lg btn-block btn-primary mt-auto">Contact Me</a>
-                </div>
-                <div class="sidebar-icon d-flex flex-column h-100 justify-content-center text-right">
-                    <i class="fas fa-2x fa-angle-double-right text-primary"></i>
-                </div>
-            </div>
-            <div class="content">
-                <!-- Navbar Start -->
-                <div class="container p-0">
-                    <nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
-                        <a href="" class="navbar-brand d-block d-lg-none">Navigation</a>
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav m-auto">
-                                <a href="index.html" class="nav-item nav-link active">Home</a>
-                                <!-- <a href="blog.html" class="nav-item nav-link">Blog</a>
-                                <a href="projects.html" class="nav-item nav-link">Projects</a> -->
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-                <!-- Navbar End -->
-                
-                <!-- Carousel Start -->
-                <div class="container p-0">
-                    <div id="blog-carousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            
-                            <!-- Caousel Item 1-->
-                            <div class="carousel-item active">
-                                <img class="w-100" src="img/carousel-1.webp" alt="Image">
-                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                    <h2 class="mb-3 text-white font-weight-bold">Kali Linux Android Noroot</h2>
-                                    <div class="d-flex text-white">
-                                        <!-- <small class="mr-2"><i class="fa fa-calendar-alt"></i> 01-Jan-2045</small> -->
-                                        <small class="mr-2"><i class="fa fa-folder"></i> Linux</small>
-                                        <small class="mr-2"><i class="fa fa-comments"></i> 6 Stars</small>
-                                    </div>
-                                    <a href="https://github.com/4q-u4/Kali-Linux-Android-noroot" class="btn btn-lg btn-outline-light mt-4">Check it</a>
-                                </div>
-                            </div>
-
-                            <!-- Carousel Item 2-->
-                            <div class="carousel-item">
-                                <img class="w-100" src="img/carousel-2.jpg" alt="Image">
-                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                    <h2 class="text-white font-weight-bold">BlackArch Guide in Arabic</h2>
-                                    <div class="d-flex">
-                                        <!-- <small class="mr-2"><i class="fa fa-calendar-alt"></i> 0</small> -->
-                                        <small class="mr-2"><i class="fa fa-folder"></i> Black Arch</small>
-                                        <small class="mr-2"><i class="fa fa-comments"></i> 0 Stars </small>
-                                    </div>
-                                    <a href="https://github.com/4q-u4/blackarch-guide" class="btn btn-lg btn-outline-light mt-4">Check it</a>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <a class="carousel-control-prev" href="#blog-carousel" data-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </a>
-                        <a class="carousel-control-next" href="#blog-carousel" data-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </a>
-                    </div>
-                </div>
-                <!-- Carousel End -->
-                
-                
-                <!--! Blog List Start -->
-                <div class="container bg-white ptt-5">
-
-                    <!--! Blog Id=1-->
-                   <div class="row blog-item px-3 pb-5">
-                        <div class="col-md-5">
-                            <img class="img-fluid mb-4 mb-md-0" src="img/blog-2.jpg" alt="Image">
-                        </div>
-                        <div class="col-md-7">
-                            <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold">Cryptography Concepts Simplified </h3>
-                            <div class="d-flex mb-3">
-                                <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i> 17-Aug-2024</small>
-                                <small class="mr-2 text-muted"><i class="fa fa-folder"></i> Cybersecurity</small>
-<!--                                 <small class="mr-2 text-muted"><i class="fa fa-comments"></i> 15 Comments</small> -->
-                            </div>
-                            <p>
-                                Cryptography is scary, Its based on math that most of us don't understand yet it makes the internet secure...                              </p>
-                            <a class="btn btn-link p-0" href="https://dev.to/4q-u4/cryptography-concepts-simplified-21j0">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <!--! Blog Id=2-->
-                     <div class="row blog-item px-3 pb-5">
-                        <div class="col-md-5">
-                            <img class="img-fluid mb-4 mb-md-0" src="img/blog-1.jpg" alt="Image">
-                        </div>
-                        <div class="col-md-7">
-                            <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold">CrowdStrike Blew Up the Internet</h3>
-                            <div class="d-flex mb-3">
-                                <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i> 20-Jul-2024</small>
-                                <small class="mr-2 text-muted"><i class="fa fa-folder"></i> Cybersecurity</small>
-                            </div>
-                            <p>
-                                Bad code broke a million Windows machines... Yesterday millions of Windows computers got BRICKED around the...                            </p>
-                            <a class="btn btn-link p-0" href="https://dev.to/4q-u4/crowdstrike-blew-up-the-internet-2c0h">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <!--! Blog Id=2-->
-                    <!-- <div class="row blog-item px-3 pb-5">
-                        <div class="col-md-5">
-                            <img class="img-fluid mb-4 mb-md-0" src="img/blog-2.jpg" alt="Image">
-                        </div>
-                        <div class="col-md-7">
-                            <h3 class="mt-md-4 px-md-3 mb-2 py-2 bg-white font-weight-bold">Lorem ipsum dolor sit amet</h3>
-                            <div class="d-flex mb-3">
-                                <small class="mr-2 text-muted"><i class="fa fa-calendar-alt"></i> 01-Jan-2045</small>
-                                <small class="mr-2 text-muted"><i class="fa fa-folder"></i> Web Design</small>
-                                <small class="mr-2 text-muted"><i class="fa fa-comments"></i> 15 Comments</small>
-                            </div>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu suscipit orci velit id libero
-                            </p>
-                            <a class="btn btn-link p-0" href="">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div> -->
-
-                <!--! Blog List End -->
-                
-                
-                <!-- Footer Start -->
-                <div class="container py-4 bg-secondary text-center">
-                    <p class="m-0 text-white">
-                        &copy; <a class="text-white font-weight-bold" href="#">Daniel - 4q-u4</a>
-                    </p>
-                </div>
-                <!-- Footer End -->
-
-
-            </div>
+        <div class="mt-8 flex flex-wrap gap-3 text-sm text-zinc-600">
+          <a href="https://github.com/danielmadii" target="_blank" rel="noreferrer" class="hover:text-black">GitHub</a>
+          <a href="https://www.linkedin.com/in/danielmadi/" target="_blank" rel="noreferrer" class="hover:text-black">LinkedIn</a>
         </div>
-        
-        <!-- Back to Top -->
-        <a href="#" class="back-to-top"><i class="fa fa-angle-double-up"></i></a>
-        
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="lib/easing/easing.min.js"></script>
-        <script src="lib/waypoints/waypoints.min.js"></script>
-        <script src="mail/jqBootstrapValidation.min.js"></script>
-        <script src="mail/contact.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+      </aside>
+
+      <main id="top" class="min-w-0">
+        <section class="border-b border-zinc-200 pb-10">
+          <div class="grid gap-8 md:grid-cols-[160px_minmax(0,1fr)] md:items-start">
+            <div class="h-40 w-40 overflow-hidden rounded-2xl bg-zinc-100 ring-1 ring-zinc-200">
+              <div class="flex h-full items-center justify-center text-sm text-zinc-400">Photo</div>
+            </div>
+            <div>
+              <h1 class="text-4xl font-semibold tracking-tight sm:text-5xl">Dan Madi</h1>
+              <p class="mt-4 max-w-3xl text-lg leading-8 text-zinc-700">
+                I build AI systems, automation tools, and modern software products with a strong bias toward execution, practical value, and clean engineering.
+              </p>
+              <p class="mt-4 max-w-3xl leading-8 text-zinc-600">
+                My interests sit across product engineering, AI workflows, security-minded system design, and scalable web platforms. I care about building things that are useful in production, not just impressive in a screenshot.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="border-b border-zinc-200 py-10">
+          <h2 class="text-2xl font-semibold tracking-tight">About</h2>
+          <div class="mt-5 space-y-5 text-[17px] leading-8 text-zinc-700">
+            <p>
+              I am an engineer and builder focused on turning ambitious ideas into usable systems. My work spans AI-powered products, automation, full-stack development, and technical problem solving.
+            </p>
+            <p>
+              I like sharp interfaces, reliable architectures, and products that reduce operational friction. That usually means thinking beyond code: product structure, security posture, workflow design, and how a system behaves under real use.
+            </p>
+            <p>
+              This site is intentionally simple. No gimmicks, no bloated animations, no fake sophistication. Just the work, the direction, and the links that matter.
+            </p>
+          </div>
+        </section>
+
+        <section id="projects" class="border-b border-zinc-200 py-10">
+          <h2 class="text-2xl font-semibold tracking-tight">Projects</h2>
+          <div class="mt-6 space-y-8">
+            <article>
+              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h3 class="text-xl font-medium">Hala AI</h3>
+                <span class="text-sm text-zinc-500">AI systems · automation · product engineering</span>
+              </div>
+              <p class="mt-2 leading-8 text-zinc-700">
+                Building AI-driven systems for customer communication, lead qualification, booking flows, and operational automation across modern channels.
+              </p>
+            </article>
+
+            <article>
+              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h3 class="text-xl font-medium">GitHub Username Availability Checker</h3>
+                <a href="https://github.com/danielmadii/GitHub-Username-Availability-Checker" target="_blank" rel="noreferrer" class="text-sm text-zinc-500 underline-offset-4 hover:underline">Repository</a>
+              </div>
+              <p class="mt-2 leading-8 text-zinc-700">
+                A lightweight Python tool for checking whether GitHub usernames are available, taken, or worth pursuing.
+              </p>
+            </article>
+
+            <article>
+              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h3 class="text-xl font-medium">Helpdesk Ticketing System</h3>
+                <a href="https://github.com/danielmadii/Helpdesk-Ticketing-System-PHP-MySQL" target="_blank" rel="noreferrer" class="text-sm text-zinc-500 underline-offset-4 hover:underline">Repository</a>
+              </div>
+              <p class="mt-2 leading-8 text-zinc-700">
+                A practical support ticketing system built with PHP and MySQL, centered on service workflows and operational clarity.
+              </p>
+            </article>
+
+            <article>
+              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h3 class="text-xl font-medium">PetFindr</h3>
+                <a href="https://github.com/danielmadii/PetFindr-Finding-Lost-Pets-Webapp" target="_blank" rel="noreferrer" class="text-sm text-zinc-500 underline-offset-4 hover:underline">Repository</a>
+              </div>
+              <p class="mt-2 leading-8 text-zinc-700">
+                A web app focused on helping reunite lost pets with owners and supporting adoption-related discovery.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="experience" class="border-b border-zinc-200 py-10">
+          <h2 class="text-2xl font-semibold tracking-tight">Experience & Focus</h2>
+          <div class="mt-6 space-y-6 text-[17px] leading-8 text-zinc-700">
+            <div>
+              <h3 class="text-lg font-medium text-zinc-900">Engineering</h3>
+              <p>Full-stack product development, modern web applications, and systems built with performance and maintainability in mind.</p>
+            </div>
+            <div>
+              <h3 class="text-lg font-medium text-zinc-900">AI & Automation</h3>
+              <p>Designing workflows and agents that reduce manual effort, improve response speed, and make software more operationally useful.</p>
+            </div>
+            <div>
+              <h3 class="text-lg font-medium text-zinc-900">Security Mindset</h3>
+              <p>Thinking about access, reliability, exposure, and failure modes early rather than pretending security is a final checkbox.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="notes" class="border-b border-zinc-200 py-10">
+          <h2 class="text-2xl font-semibold tracking-tight">Notes</h2>
+          <div class="mt-6 space-y-4 text-[17px] leading-8 text-zinc-700">
+            <p>
+              I’m interested in the overlap between AI productization, secure engineering, and systems that create measurable business leverage.
+            </p>
+            <p>
+              Over time, this section can hold writing, technical notes, project breakdowns, or case studies. Right now, the main priority is presenting signal without noise.
+            </p>
+          </div>
+        </section>
+
+        <section id="contact" class="py-10">
+          <h2 class="text-2xl font-semibold tracking-tight">Contact</h2>
+          <p class="mt-5 max-w-2xl text-[17px] leading-8 text-zinc-700">
+            For serious engineering, AI, product, or collaboration conversations, reach out through GitHub or LinkedIn.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-5 text-[17px]">
+            <a href="https://github.com/danielmadii" target="_blank" rel="noreferrer" class="text-zinc-700 underline-offset-4 hover:underline">GitHub</a>
+            <a href="https://www.linkedin.com/in/danielmadi/" target="_blank" rel="noreferrer" class="text-zinc-700 underline-offset-4 hover:underline">LinkedIn</a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
 </html>
+
