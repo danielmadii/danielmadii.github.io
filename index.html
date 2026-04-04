@@ -187,12 +187,7 @@
     section {
       padding: 60px 0;
       border-bottom: 1px solid var(--border);
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
     }
-
-    section.visible { opacity: 1; transform: translateY(0); }
 
     section:last-child { border-bottom: none; }
 
@@ -715,24 +710,22 @@
 </div>
 
 <script>
-  // Scroll spy + section reveal = document.querySelectorAll('section[id]');
+  const sections = document.querySelectorAll('section[id]');
   const navItems = document.querySelectorAll('.nav-item');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
         const id = entry.target.getAttribute('id');
         navItems.forEach(item => {
           item.classList.toggle('active', item.dataset.section === id);
         });
       }
     });
-  }, { threshold: 0.15, rootMargin: '-60px 0px -40% 0px' });
+  }, { threshold: 0.2 });
 
   sections.forEach(s => observer.observe(s));
 </script>
 
 </body>
 </html>
-
