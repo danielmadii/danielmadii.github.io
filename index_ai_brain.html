@@ -8,20 +8,17 @@
   <meta property="og:title" content="Daniel Madi" />
   <meta property="og:description" content="Engineer building AI systems, automation, and modern software products." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0b0b0b" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%230b0b0b'/%3E%3Ccircle cx='32' cy='32' r='22' fill='%23c8ff57'/%3E%3Cpath d='M21 42V22h8.4c8.4 0 13.6 3.8 13.6 10S37.8 42 29.4 42H21zm6-4h2c5.2 0 8.1-2 8.1-6s-2.9-6-8.1-6h-2v12z' fill='%230b0b0b'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #09090f;
-      --surface: rgba(17, 18, 28, 0.92);
-      --surface-strong: rgba(24, 26, 40, 0.98);
-      --border: rgba(130, 148, 255, 0.16);
-      --text: #d8def7;
-      --muted: #8f98bf;
-      --heading: #f7f8ff;
+      --bg: #0b0b0b;
+      --surface: #141414;
+      --border: #1f1f1f;
+      --text: #d4d4d4;
+      --muted: #5a5a5a;
+      --heading: #f0f0f0;
       --accent: #c8ff57;
       --accent-dim: rgba(200,255,87,0.08);
     }
@@ -50,15 +47,6 @@
       pointer-events: none;
       z-index: 9999;
     }
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: transparent;
-      pointer-events: none;
-      z-index: -1;
-      filter: blur(8px);
-    }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 3px; }
@@ -81,6 +69,24 @@
       .wrapper { grid-template-columns: 1fr; }
       aside { position: static; border-right: none; border-bottom: 1px solid var(--border); padding: 28px 0 24px; }
       main { padding: 40px 0; }
+    }
+
+
+
+    @media (max-width: 980px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        order: -1;
+        height: 260px;
+      }
+
+      .brain-wrap {
+        width: 220px;
+        height: 220px;
+      }
     }
 
     /* Sidebar */
@@ -110,15 +116,14 @@
       width: 7px;
       height: 7px;
       background: var(--accent);
-      box-shadow: 0 0 18px rgba(124,58,237,0.45);
       border-radius: 50%;
       flex-shrink: 0;
       animation: pulse 3s ease-in-out infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(124,58,237,0.45); }
-      50% { opacity: 0.95; transform: scale(0.92); box-shadow: 0 0 0 8px rgba(0,245,212,0); }
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(200,255,87,0.4); }
+      50% { opacity: 0.8; transform: scale(0.9); box-shadow: 0 0 0 5px rgba(200,255,87,0); }
     }
 
     nav {
@@ -232,7 +237,7 @@
       width: 96px;
       height: 96px;
       border-radius: 16px;
-      background: var(--surface-strong);
+      background: var(--surface);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -256,10 +261,7 @@
 
     h1 em {
       font-style: normal;
-      background: var(--accent);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: var(--accent);
     }
 
     .hero-desc {
@@ -284,6 +286,149 @@
       margin-top: 28px;
     }
 
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-visual {
+      position: relative;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brain-wrap {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,255,87,0.14);
+      background:
+        radial-gradient(circle at center, rgba(200,255,87,0.12) 0%, rgba(200,255,87,0.03) 34%, rgba(20,20,20,0.2) 55%, transparent 72%),
+        radial-gradient(circle at center, rgba(255,255,255,0.015), transparent 65%);
+      box-shadow: 0 0 80px rgba(200,255,87,0.06), inset 0 0 50px rgba(200,255,87,0.04);
+      overflow: hidden;
+    }
+
+    .brain-wrap::before,
+    .brain-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 24px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,255,87,0.08);
+      animation: rotateRing 14s linear infinite;
+    }
+
+    .brain-wrap::after {
+      inset: 44px;
+      animation-direction: reverse;
+      animation-duration: 18s;
+    }
+
+    .brain-core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 130px;
+      height: 130px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(200,255,87,0.32), rgba(200,255,87,0.08) 45%, rgba(200,255,87,0.02) 72%, transparent 100%);
+      filter: blur(0.2px);
+      animation: corePulse 4.5s ease-in-out infinite;
+      box-shadow: 0 0 40px rgba(200,255,87,0.18);
+    }
+
+    .brain-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.85;
+    }
+
+    .brain-svg .line {
+      stroke: rgba(200,255,87,0.36);
+      stroke-width: 1;
+      fill: none;
+      stroke-linecap: round;
+      stroke-dasharray: 6 10;
+      animation: dashFlow 9s linear infinite;
+    }
+
+    .brain-svg .node {
+      fill: #c8ff57;
+      filter: drop-shadow(0 0 8px rgba(200,255,87,0.65));
+      animation: nodePulse 3.2s ease-in-out infinite;
+    }
+
+    .brain-svg .node:nth-child(3n) { animation-delay: 0.6s; }
+    .brain-svg .node:nth-child(4n) { animation-delay: 1.2s; }
+
+    .brain-orbit {
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      animation: rotateRing 16s linear infinite;
+    }
+
+    .brain-orbit span {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(200,255,87,0.55);
+    }
+
+    .brain-orbit span:nth-child(1) { top: 10px; left: 50%; transform: translateX(-50%); }
+    .brain-orbit span:nth-child(2) { right: 22px; top: 70px; }
+    .brain-orbit span:nth-child(3) { bottom: 34px; right: 60px; }
+    .brain-orbit span:nth-child(4) { bottom: 58px; left: 44px; }
+    .brain-orbit span:nth-child(5) { left: 18px; top: 92px; }
+
+    .brain-label {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(200,255,87,0.8);
+      padding: 6px 10px;
+      border: 1px solid rgba(200,255,87,0.18);
+      background: rgba(11,11,11,0.74);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    @keyframes rotateRing {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes dashFlow {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -120; }
+    }
+
+    @keyframes nodePulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.35); }
+    }
+
+    @keyframes corePulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(0.96); opacity: 0.86; }
+      50% { transform: translate(-50%, -50%) scale(1.06); opacity: 1; }
+    }
+
     .tag {
       font-size: 11px;
       letter-spacing: 0.08em;
@@ -292,7 +437,7 @@
       border: 1px solid var(--border);
       border-radius: 3px;
       color: var(--muted);
-      background: var(--surface-strong);
+      background: var(--surface);
       transition: border-color 0.2s, color 0.2s;
     }
 
@@ -367,8 +512,7 @@
 
     .project-card:hover {
       background: var(--accent-dim);
-      border-color: rgba(124,58,237,0.38);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.28), 0 0 0 1px rgba(0,245,212,0.08);
+      border-color: rgba(200,255,87,0.2);
     }
 
     .project-card:hover::before { opacity: 1; }
@@ -494,7 +638,7 @@
       padding: 10px 20px;
       border: 1px solid var(--border);
       border-radius: 4px;
-      background: var(--surface-strong);
+      background: var(--surface);
       transition: border-color 0.2s, color 0.2s, background 0.2s;
     }
 
@@ -538,11 +682,6 @@
     }
 
     .hero { animation: fadeUp 0.7s ease forwards; }
-
-    body, .logo-dot, .hero-label, .hero-label::after, .nav-item.active, .project-card::before,
-    .project-arrow, .contact-link:hover, .tag:hover, .status-dot, .notes-coming-dot {
-      transition: color 0.6s ease, background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
-    }
   </style>
 </head>
 <body>
@@ -601,20 +740,65 @@
 
     <!-- Hero -->
     <section class="hero visible">
-      <div class="hero-avatar"><img src="assets/1775162693811.png" alt="Daniel Madi" style="width:100%;height:100%;object-fit:cover;" /></div>
-      <h1>Daniel<br><em>Madi</em></h1>
-      <p class="hero-desc">
-        I build AI systems, automation tools, and modern software products with a strong bias toward execution, practical value, and clean engineering.
-      </p>
-      <p class="hero-sub">
-        My interests sit across product engineering, AI workflows, security-minded system design, and scalable web platforms.
-      </p>
-      <div class="hero-tags">
-        <span class="tag">AI Systems</span>
-        <span class="tag">Automation</span>
-        <span class="tag">Full-Stack</span>
-        <span class="tag">Security</span>
-        <span class="tag">Product Engineering</span>
+      <div class="hero-grid">
+        <div>
+          <div class="hero-avatar"><img src="assets/1775162693811.png" alt="Daniel Madi" style="width:100%;height:100%;object-fit:cover;" /></div>
+          <h1>Daniel<br><em>Madi</em></h1>
+          <p class="hero-desc">
+            I build AI systems, automation tools, and modern software products with a strong bias toward execution, practical value, and clean engineering.
+          </p>
+          <p class="hero-sub">
+            My interests sit across product engineering, AI workflows, security-minded system design, and scalable web platforms.
+          </p>
+          <div class="hero-tags">
+            <span class="tag">AI Systems</span>
+            <span class="tag">Automation</span>
+            <span class="tag">Full-Stack</span>
+            <span class="tag">Security</span>
+            <span class="tag">Product Engineering</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="brain-wrap">
+            <div class="brain-core"></div>
+            <svg class="brain-svg" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+              <path class="line" d="M92 78C108 60 130 52 153 56C179 60 198 77 207 99C216 122 212 146 198 165C185 184 164 197 140 198C116 199 95 190 81 172C67 154 62 131 67 109C72 97 80 86 92 78Z"/>
+              <path class="line" d="M102 89C115 78 132 74 148 77C166 80 181 92 188 108C196 126 192 144 182 158C171 173 156 181 139 182C121 183 106 176 95 163C83 150 79 134 82 118C85 106 92 96 102 89Z"/>
+              <path class="line" d="M138 64V198"/>
+              <path class="line" d="M104 96C118 107 126 121 129 140"/>
+              <path class="line" d="M173 92C156 105 147 121 145 143"/>
+              <path class="line" d="M88 131H119"/>
+              <path class="line" d="M158 132H193"/>
+              <path class="line" d="M101 165C115 158 124 151 131 140"/>
+              <path class="line" d="M175 164C161 158 153 151 146 140"/>
+
+              <circle class="node" cx="92" cy="78" r="3.2"/>
+              <circle class="node" cx="153" cy="56" r="3.2"/>
+              <circle class="node" cx="207" cy="99" r="3.2"/>
+              <circle class="node" cx="198" cy="165" r="3.2"/>
+              <circle class="node" cx="140" cy="198" r="3.2"/>
+              <circle class="node" cx="81" cy="172" r="3.2"/>
+              <circle class="node" cx="67" cy="109" r="3.2"/>
+              <circle class="node" cx="138" cy="64" r="2.8"/>
+              <circle class="node" cx="138" cy="101" r="2.8"/>
+              <circle class="node" cx="138" cy="140" r="2.8"/>
+              <circle class="node" cx="138" cy="178" r="2.8"/>
+              <circle class="node" cx="104" cy="96" r="2.8"/>
+              <circle class="node" cx="173" cy="92" r="2.8"/>
+              <circle class="node" cx="101" cy="165" r="2.8"/>
+              <circle class="node" cx="175" cy="164" r="2.8"/>
+            </svg>
+            <div class="brain-orbit">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="brain-label">AI / Systems / Execution</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -647,7 +831,7 @@
 
         <div class="project-card">
           <div>
-            <div class="project-name">Hala AI · tryhala.ai</div>
+            <div class="project-name">Hala AI</div>
             <div class="project-desc">Hala AI is an end-to-end platform for AI-driven business communication. It handles customer conversations across web, WhatsApp, and other modern channels — qualifying leads, answering questions, routing inquiries, and booking appointments without human intervention. Built with a focus on reliability and real operational value, Hala replaces fragmented manual workflows with intelligent, always-on agents that integrate directly into how a business runs. The goal is not to bolt AI onto existing processes, but to redesign those processes around what AI can now do well.</div>
             <div class="project-arrow">In development ↗</div>
           </div>
@@ -724,7 +908,7 @@
       </div>
 
       <div class="status-bar">
-        <span>© 2026 Daniel Madi. All rights reserved.</span>
+        <span>© 2025 Daniel Madi. All rights reserved.</span>
       </div>
     </section>
 
