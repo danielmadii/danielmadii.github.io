@@ -36,7 +36,8 @@
       color: var(--text);
       font-size: 14px;
       line-height: 1.9;
-      antialiased: true;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
 
@@ -70,17 +71,93 @@
     .wrapper {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 28px;
+      padding: 0 16px;
       display: grid;
-      grid-template-columns: 200px 1fr;
+      grid-template-columns: 1fr;
       gap: 0;
       min-height: 100vh;
     }
 
+    @media (min-width: 769px) {
+      .wrapper {
+        padding: 0 28px;
+        grid-template-columns: 200px 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
-      .wrapper { grid-template-columns: 1fr; }
-      aside { position: static; border-right: none; border-bottom: 1px solid var(--border); padding: 28px 0 24px; }
-      main { padding: 40px 0; }
+      aside {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 24px 0 20px;
+      }
+
+      nav {
+        margin-top: 28px;
+        gap: 0;
+      }
+
+      .nav-item::after {
+        display: none;
+      }
+
+      .sidebar-links {
+        margin-top: 24px;
+        padding-top: 24px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      main {
+        padding: 32px 0 0;
+      }
+
+      section {
+        padding: 44px 0;
+      }
+
+      .hero {
+        padding-top: 0;
+      }
+
+      .hero-avatar {
+        width: 84px;
+        height: 84px;
+        margin-bottom: 20px;
+      }
+
+      .hero-desc,
+      .hero-sub,
+      .about-body,
+      .notes-body,
+      .contact-body,
+      .exp-list {
+        max-width: 100%;
+      }
+
+      .section-header {
+        margin-bottom: 28px;
+      }
+
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-links {
+        flex-direction: column;
+      }
+
+      #contact {
+        min-height: auto;
+      }
+
+      .contact-link {
+        width: 100%;
+        justify-content: center;
+      }
     }
 
     /* Sidebar */
@@ -192,8 +269,11 @@
 
     /* Main */
     main {
-      padding: 48px 0 80px 52px;
+      padding: 48px 0 0 52px;
       min-width: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Sections */
@@ -441,17 +521,17 @@
 
     .exp-desc { font-size: 13px; color: var(--muted); line-height: 1.9; }
 
-    /* Notes */
-    .notes-body {
+    /* Research */
+    .research-body {
       max-width: 580px;
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
 
-    .notes-body p { font-size: 14px; color: var(--muted); line-height: 2; }
+    .research-body p { font-size: 14px; color: var(--muted); line-height: 2; }
 
-    .notes-coming {
+    .research-coming {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -465,7 +545,7 @@
       margin-top: 12px;
     }
 
-    .notes-coming-dot {
+    .research-coming-dot {
       width: 5px;
       height: 5px;
       background: var(--muted);
@@ -473,6 +553,13 @@
     }
 
     /* Contact */
+    #contact {
+      display: flex;
+      flex-direction: column;
+      min-height: max(420px, calc(100vh - 96px));
+      padding-bottom: 0;
+    }
+
     .contact-body { max-width: 520px; }
 
     .contact-body p { font-size: 14px; color: var(--muted); line-height: 2; margin-bottom: 28px; }
@@ -509,9 +596,9 @@
       display: flex;
       align-items: center;
       gap: 20px;
-      padding: 12px 0;
+      padding: 12px 0 16px;
       border-top: 1px solid var(--border);
-      margin-top: 60px;
+      margin-top: auto;
       font-size: 11px;
       color: var(--muted);
       letter-spacing: 0.06em;
@@ -540,7 +627,7 @@
     .hero { animation: fadeUp 0.7s ease forwards; }
 
     body, .logo-dot, .hero-label, .hero-label::after, .nav-item.active, .project-card::before,
-    .project-arrow, .contact-link:hover, .tag:hover, .status-dot, .notes-coming-dot {
+    .project-arrow, .contact-link:hover, .tag:hover, .status-dot, .research-coming-dot {
       transition: color 0.6s ease, background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
     }
   </style>
@@ -564,8 +651,8 @@
       <a href="#experience" class="nav-item" data-section="experience">
         <span class="num">03</span> Experience
       </a>
-      <a href="#notes" class="nav-item" data-section="notes">
-        <span class="num">04</span> Notes
+      <a href="#research" class="nav-item" data-section="research">
+        <span class="num">04</span> Research
       </a>
       <a href="#contact" class="nav-item" data-section="contact">
         <span class="num">05</span> Contact
@@ -602,13 +689,7 @@
     <!-- Hero -->
     <section class="hero visible">
       <div class="hero-avatar"><img src="assets/1775162693811.png" alt="Daniel Madi" style="width:100%;height:100%;object-fit:cover;" /></div>
-      <h1>Daniel<br><em>Madi</em></h1>
-      <p class="hero-desc">
-        I build AI systems, automation tools, and modern software products with a strong bias toward execution, practical value, and clean engineering.
-      </p>
-      <p class="hero-sub">
-        My interests sit across product engineering, AI workflows, security-minded system design, and scalable web platforms.
-      </p>
+      <h1>Daniel <em>Madi</em></h1>
       <div class="hero-tags">
         <span class="tag">AI Systems</span>
         <span class="tag">Automation</span>
@@ -626,13 +707,13 @@
       </div>
       <div class="about-body">
         <p>
-          I am an engineer and builder focused on turning ambitious ideas into usable systems. My work spans AI-powered products, automation, full-stack development, and technical problem solving.
+          I build systems that compress complexity into execution. My work sits at the intersection of AI, product engineering, automation, and infrastructure—where ideas either become operational leverage or die as noise.
         </p>
         <p>
-          I like sharp interfaces, reliable architectures, and products that reduce operational friction. That usually means thinking beyond code: product structure, security posture, workflow design, and how a system behaves under real use.
+          I care about products that do real work: interfaces that clarify, architectures that endure, and workflows that remove drag instead of adding theater. That means thinking in systems, not pages; in outcomes, not features.
         </p>
         <p>
-          This site is intentionally minimal. No gimmicks, no bloated animations. Just the work, the direction, and the links that matter.
+          This site reflects that philosophy. Minimal by choice, direct by design, and structured around signal rather than decoration.
         </p>
       </div>
     </section>
@@ -645,14 +726,14 @@
       </div>
       <div class="projects-grid">
 
-        <div class="project-card">
+        <a href="https://tryhala.ai" target="_blank" rel="noreferrer" class="project-card">
           <div>
             <div class="project-name">Hala AI · tryhala.ai</div>
-            <div class="project-desc">Hala AI is an end-to-end platform for AI-driven business communication. It handles customer conversations across web, WhatsApp, and other modern channels — qualifying leads, answering questions, routing inquiries, and booking appointments without human intervention. Built with a focus on reliability and real operational value, Hala replaces fragmented manual workflows with intelligent, always-on agents that integrate directly into how a business runs. The goal is not to bolt AI onto existing processes, but to redesign those processes around what AI can now do well.</div>
-            <div class="project-arrow">In development ↗</div>
+            <div class="project-desc">Hala AI is an AI communications platform built to replace slow, fragmented customer operations with intelligent execution. It captures inbound demand, qualifies leads, answers repetitive questions, routes intent, and books actions across channels like web and WhatsApp. The objective is simple: reduce response latency, increase conversion, and turn communication from operational overhead into a scalable growth layer.</div>
+            <div class="project-arrow">View platform ↗</div>
           </div>
           <div class="project-meta">AI · Automation</div>
-        </div>
+        </a>
 
       </div>
     </section>
@@ -666,35 +747,35 @@
       <div class="exp-list">
         <div class="exp-item">
           <div class="exp-title">Engineering</div>
-          <div class="exp-desc">Full-stack product development, modern web applications, and systems built with performance and maintainability in mind.</div>
+          <div class="exp-desc">I architect and ship full-stack systems with an emphasis on speed, maintainability, and production-grade clarity.</div>
         </div>
         <div class="exp-item">
           <div class="exp-title">AI & Automation</div>
-          <div class="exp-desc">Designing workflows and agents that reduce manual effort, improve response speed, and make software more operationally useful.</div>
+          <div class="exp-desc">I build AI-driven workflows and automation layers that remove human bottlenecks, accelerate response loops, and create measurable operational advantage.</div>
         </div>
         <div class="exp-item">
           <div class="exp-title">Security Mindset</div>
-          <div class="exp-desc">Thinking about access, reliability, exposure, and failure modes early rather than treating security as a final checkbox.</div>
+          <div class="exp-desc">I design with security and failure tolerance upfront—treating reliability, access control, and system exposure as core architecture, not cleanup work.</div>
         </div>
       </div>
     </section>
 
-    <!-- Notes -->
-    <section id="notes">
+    <!-- Research -->
+    <section id="research">
       <div class="section-header">
         <span class="section-num">04</span>
-        <h2>Notes</h2>
+        <h2>Research</h2>
       </div>
-      <div class="notes-body">
+      <div class="research-body">
         <p>
-          Interested in the overlap between AI productization, secure engineering, and systems that create measurable business leverage.
+          My research focus is pragmatic: AI systems, automation architecture, product mechanics, secure infrastructure, and the patterns that separate novelty from durable leverage.
         </p>
         <p>
-          Over time, this section will hold writing, technical notes, project breakdowns, and case studies.
+          This section will document frameworks, technical breakdowns, operating principles, and first-principles thinking behind the systems I build.
         </p>
-        <div class="notes-coming">
-          <span class="notes-coming-dot"></span>
-          Writing coming soon
+        <div class="research-coming">
+          <span class="research-coming-dot"></span>
+          Publishing research soon
         </div>
       </div>
     </section>
@@ -706,7 +787,7 @@
         <h2>Contact</h2>
       </div>
       <div class="contact-body">
-        <p>For engineering, AI, product, or collaboration conversations — reach out through GitHub or LinkedIn.</p>
+        <p>For serious conversations around engineering, AI systems, product architecture, or building ambitious things—reach out through GitHub or LinkedIn.</p>
         <div class="contact-links">
           <a href="https://github.com/danielmadii" target="_blank" rel="noreferrer" class="contact-link">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
