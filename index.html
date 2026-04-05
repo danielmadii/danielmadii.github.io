@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Daniel Madi</title>
   <meta name="description" content="Daniel Madi — engineer building AI systems, automation, and modern software products." />
   <meta property="og:title" content="Daniel Madi" />
@@ -51,15 +51,6 @@
       pointer-events: none;
       z-index: 9999;
     }
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: transparent;
-      pointer-events: none;
-      z-index: -1;
-      filter: blur(8px);
-    }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 3px; }
@@ -67,97 +58,26 @@
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
-    /* Layout */
+    /* =========================================
+       LAYOUT — Desktop default
+    ========================================= */
     .wrapper {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 16px;
+      padding: 0 28px;
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: 200px 1fr;
       gap: 0;
       min-height: 100vh;
     }
 
-    @media (min-width: 769px) {
-      .wrapper {
-        padding: 0 28px;
-        grid-template-columns: 200px 1fr;
-      }
+    /* aside-top collapses on desktop — logo & button become direct flex children of aside */
+    .aside-top {
+      display: contents;
     }
 
-    @media (max-width: 768px) {
-      aside {
-        position: static;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 24px 0 20px;
-      }
-
-      nav {
-        margin-top: 28px;
-        gap: 0;
-      }
-
-      .nav-item::after {
-        display: none;
-      }
-
-      .sidebar-links {
-        margin-top: 24px;
-        padding-top: 24px;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 14px;
-      }
-
-      main {
-        padding: 32px 0 0;
-      }
-
-      section {
-        padding: 44px 0;
-      }
-
-      .hero {
-        padding-top: 0;
-      }
-
-      .hero-avatar {
-        width: 84px;
-        height: 84px;
-        margin-bottom: 20px;
-      }
-
-      .hero-desc,
-      .hero-sub,
-      .about-body,
-      .notes-body,
-      .contact-body,
-      .exp-list {
-        max-width: 100%;
-      }
-
-      .section-header {
-        margin-bottom: 28px;
-      }
-
-      .project-card {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-links {
-        flex-direction: column;
-      }
-
-      #contact {
-        min-height: auto;
-      }
-
-      .contact-link {
-        width: 100%;
-        justify-content: center;
-      }
+    .mobile-menu-toggle {
+      display: none;
     }
 
     /* Sidebar */
@@ -217,6 +137,7 @@
       padding: 7px 0;
       transition: color 0.2s;
       position: relative;
+      min-height: 44px; /* touch target */
     }
 
     .nav-item .num {
@@ -262,10 +183,16 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      min-height: 36px;
     }
 
     .sidebar-link svg { flex-shrink: 0; transition: color 0.2s; }
     .sidebar-link:hover { color: var(--accent); }
+
+    /* Mobile nav panel hidden on desktop */
+    .mobile-nav-panel {
+      display: contents;
+    }
 
     /* Main */
     main {
@@ -499,8 +426,6 @@
       max-width: 580px;
     }
 
-    .exp-item {}
-
     .exp-title {
       font-family: 'Syne', sans-serif;
       font-size: 14px;
@@ -573,6 +498,7 @@
       height: 5px;
       background: var(--muted);
       border-radius: 50%;
+      flex-shrink: 0;
     }
 
     /* Contact */
@@ -590,6 +516,7 @@
     .contact-links {
       display: flex;
       gap: 16px;
+      flex-wrap: wrap;
     }
 
     .contact-link {
@@ -606,6 +533,7 @@
       border-radius: 4px;
       background: var(--surface-strong);
       transition: border-color 0.2s, color 0.2s, background 0.2s;
+      min-height: 44px;
     }
 
     .contact-link:hover {
@@ -627,12 +555,6 @@
       letter-spacing: 0.06em;
     }
 
-    .status-indicator {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
     .status-dot {
       width: 6px;
       height: 6px;
@@ -649,21 +571,312 @@
 
     .hero { animation: fadeUp 0.7s ease forwards; }
 
-    body, .logo-dot, .hero-label, .hero-label::after, .nav-item.active, .project-card::before,
-    .project-arrow, .contact-link:hover, .tag:hover, .status-dot, .research-coming-dot {
-      transition: color 0.6s ease, background 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease;
+    /* =========================================
+       MOBILE — max-width: 768px
+    ========================================= */
+    @media (max-width: 768px) {
+
+      .wrapper {
+        display: block;
+        max-width: 100%;
+        min-height: auto;
+        padding: 0;
+      }
+
+      /* === Sidebar → sticky top bar === */
+      aside {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 0 20px;
+        margin: 0;
+        background: rgba(9, 9, 15, 0.96);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        flex-direction: column;
+        display: flex;
+      }
+
+      .aside-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: 58px;
+      }
+
+      /* Show hamburger */
+      .mobile-menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border: 1px solid var(--border);
+        background: var(--surface-strong);
+        color: var(--heading);
+        border-radius: 10px;
+        cursor: pointer;
+        flex-shrink: 0;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+
+      .mobile-menu-toggle svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      /* Nav panel collapses */
+      .mobile-nav-panel {
+        display: none;
+        padding: 8px 0 16px;
+        border-top: 1px solid var(--border);
+        margin-top: 0;
+      }
+
+      aside.mobile-open .mobile-nav-panel {
+        display: block;
+      }
+
+      nav {
+        margin-top: 0;
+        gap: 0;
+      }
+
+      .nav-item {
+        padding: 14px 0;
+        min-height: 52px;
+        font-size: 13px;
+        border-bottom: 1px solid rgba(130, 148, 255, 0.08);
+      }
+
+      .nav-item:last-child {
+        border-bottom: none;
+      }
+
+      .nav-item::after {
+        display: none;
+      }
+
+      .sidebar-links {
+        margin-top: 0;
+        padding-top: 16px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+        border-top: 1px solid rgba(130, 148, 255, 0.08);
+      }
+
+      .sidebar-link {
+        min-height: 44px;
+        font-size: 11px;
+      }
+
+      /* === Main content === */
+      main {
+        display: block;
+        min-width: 0;
+        min-height: 0;
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 44px 0;
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+
+      .hero-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 14px;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: clamp(36px, 10vw, 52px);
+        line-height: 1.06;
+        margin-bottom: 20px;
+        letter-spacing: -0.025em;
+      }
+
+      .hero-tags {
+        gap: 7px;
+        margin-top: 22px;
+      }
+
+      .tag {
+        font-size: 10px;
+        padding: 6px 10px;
+        min-height: 32px;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .section-header {
+        margin-bottom: 28px;
+        gap: 12px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .about-body,
+      .exp-list,
+      .research-body,
+      .contact-body {
+        max-width: 100%;
+      }
+
+      .about-body p,
+      .exp-desc,
+      .contact-body p {
+        font-size: 13px;
+        line-height: 1.85;
+      }
+
+      /* Project card — single column, always show arrow */
+      .project-card {
+        grid-template-columns: 1fr;
+        padding: 20px 16px;
+        gap: 12px;
+      }
+
+      .project-meta {
+        order: -1;
+        margin-bottom: 4px;
+      }
+
+      .project-arrow {
+        opacity: 1; /* always visible on touch */
+        margin-top: 10px;
+      }
+
+      .project-desc {
+        font-size: 12px;
+        line-height: 1.8;
+      }
+
+      /* Research */
+      .research-coming {
+        width: 100%;
+        padding: 14px 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      /* Contact links — full width stacked */
+      .contact-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .contact-link {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 12px;
+      }
+
+      #contact {
+        min-height: auto;
+      }
+
+      .status-bar {
+        padding: 16px 0 24px;
+        font-size: 10px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .exp-list {
+        gap: 28px;
+      }
+
+    }
+
+    /* =========================================
+       EXTRA SMALL — max-width: 390px
+    ========================================= */
+    @media (max-width: 390px) {
+
+      main {
+        padding: 0 16px;
+      }
+
+      aside {
+        padding: 0 16px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+
+      .tag {
+        font-size: 9px;
+        padding: 5px 8px;
+      }
+
+      .about-body p,
+      .exp-desc,
+      .contact-body p,
+      .project-desc {
+        font-size: 12px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      .project-card {
+        padding: 16px 14px;
+      }
+
+      .contact-link {
+        padding: 13px 16px;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+      }
+
+      .sidebar-links {
+        gap: 6px 16px;
+      }
+
     }
   </style>
 </head>
 <body>
 
 <div class="wrapper">
-  <aside>
-    <a href="#top" class="logo">
-      <span class="logo-dot"></span>
-      Daniel Madi
-    </a>
+  <aside id="site-aside">
+    <div class="aside-top">
+      <a href="#top" class="logo">
+        <span class="logo-dot"></span>
+        Daniel Madi
+      </a>
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-panel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+    </div>
 
+    <div class="mobile-nav-panel" id="mobile-nav-panel">
     <nav id="main-nav">
       <a href="#about" class="nav-item" data-section="about">
         <span class="num">01</span> About
@@ -684,26 +897,24 @@
 
     <div class="sidebar-links">
       <a href="https://github.com/danielmadii" target="_blank" rel="noreferrer" class="sidebar-link">
-        <!-- GitHub icon -->
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
         </svg>
         GitHub
       </a>
       <a href="https://www.linkedin.com/in/danielmadi/" target="_blank" rel="noreferrer" class="sidebar-link">
-        <!-- LinkedIn icon -->
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
         </svg>
         LinkedIn
       </a>
       <a href="https://x.com/danielmadii" target="_blank" rel="noreferrer" class="sidebar-link">
-        <!-- X / Twitter icon -->
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.213 5.567 5.95-5.567zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
         </svg>
         X
       </a>
+    </div>
     </div>
   </aside>
 
@@ -844,6 +1055,8 @@
 <script>
   const sections = document.querySelectorAll('section[id]');
   const navItems = document.querySelectorAll('.nav-item');
+  const aside = document.getElementById('site-aside');
+  const mobileToggle = document.getElementById('mobile-menu-toggle');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -857,6 +1070,35 @@
   }, { threshold: 0.2 });
 
   sections.forEach(s => observer.observe(s));
+
+  if (mobileToggle && aside) {
+    mobileToggle.addEventListener('click', () => {
+      const isOpen = aside.classList.toggle('mobile-open');
+      mobileToggle.setAttribute('aria-expanded', String(isOpen));
+      // Swap icon between hamburger and X
+      mobileToggle.querySelector('svg path').setAttribute('d',
+        isOpen ? 'M6 6l12 12M6 18L18 6' : 'M4 7h16M4 12h16M4 17h16'
+      );
+    });
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          aside.classList.remove('mobile-open');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+          mobileToggle.querySelector('svg path').setAttribute('d', 'M4 7h16M4 12h16M4 17h16');
+        }
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        aside.classList.remove('mobile-open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        mobileToggle.querySelector('svg path').setAttribute('d', 'M4 7h16M4 12h16M4 17h16');
+      }
+    });
+  }
 </script>
 
 </body>
