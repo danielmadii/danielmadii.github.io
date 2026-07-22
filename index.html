@@ -418,6 +418,146 @@
 
     .project-card:hover .project-arrow { opacity: 1; }
 
+    /* =========================================
+       Portfolio
+    ========================================== */
+    .portfolio-intro {
+      max-width: 600px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 28px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .portfolio-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 22px 20px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: transparent;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .portfolio-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .portfolio-card:not(.offline):hover {
+      background: var(--accent-dim);
+      border-color: rgba(124,58,237,0.38);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.28), 0 0 0 1px rgba(0,245,212,0.08);
+    }
+
+    .portfolio-card:not(.offline):hover::before { opacity: 1; }
+
+    .portfolio-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .portfolio-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--heading);
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .portfolio-domain {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      word-break: break-all;
+    }
+
+    .portfolio-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .portfolio-live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(200,255,87,0.5);
+      flex-shrink: 0;
+    }
+
+    .portfolio-card.offline .portfolio-live-dot {
+      background: #ff6b6b;
+      box-shadow: none;
+    }
+
+    .portfolio-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    .portfolio-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .portfolio-tech {
+      font-size: 10px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: var(--surface-strong);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .portfolio-tech.wp {
+      border-color: rgba(200,255,87,0.4);
+      background: rgba(200,255,87,0.1);
+      color: var(--accent);
+      box-shadow: 0 0 16px rgba(200,255,87,0.08);
+    }
+
+    .portfolio-card.offline {
+      opacity: 0.6;
+      cursor: default;
+    }
+
     /* Experience */
     .exp-list {
       display: flex;
@@ -766,6 +906,20 @@
         line-height: 1.8;
       }
 
+      /* Portfolio — single column on mobile */
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-card {
+        padding: 20px 16px;
+      }
+
+      .portfolio-desc {
+        font-size: 12px;
+        line-height: 1.8;
+      }
+
       /* Research */
       .research-coming {
         width: 100%;
@@ -835,7 +989,8 @@
       .about-body p,
       .exp-desc,
       .contact-body p,
-      .project-desc {
+      .project-desc,
+      .portfolio-desc {
         font-size: 12px;
       }
 
@@ -843,7 +998,8 @@
         font-size: 18px;
       }
 
-      .project-card {
+      .project-card,
+      .portfolio-card {
         padding: 16px 14px;
       }
 
@@ -884,14 +1040,17 @@
       <a href="#projects" class="nav-item" data-section="projects">
         <span class="num">02</span> Projects
       </a>
+      <a href="#portfolio" class="nav-item" data-section="portfolio">
+        <span class="num">03</span> Portfolio
+      </a>
       <a href="#experience" class="nav-item" data-section="experience">
-        <span class="num">03</span> Experience
+        <span class="num">04</span> Experience
       </a>
       <a href="#research" class="nav-item" data-section="research">
-        <span class="num">04</span> Research
+        <span class="num">05</span> Research
       </a>
       <a href="#contact" class="nav-item" data-section="contact">
-        <span class="num">05</span> Contact
+        <span class="num">06</span> Contact
       </a>
     </nav>
 
@@ -972,10 +1131,159 @@
       </div>
     </section>
 
+    <!-- Portfolio -->
+    <section id="portfolio">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2>Portfolio</h2>
+      </div>
+      <p class="portfolio-intro">
+        A selection of live websites I've designed, built, and shipped—spanning WordPress builds, e-commerce, and custom web platforms for real businesses.
+      </p>
+      <div class="portfolio-grid">
+
+        <a href="https://runwaste.com" target="_blank" rel="noreferrer" class="portfolio-card">
+          <div class="portfolio-top">
+            <div>
+              <div class="portfolio-name">Runwaste</div>
+              <div class="portfolio-domain">runwaste.com</div>
+            </div>
+            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
+          </div>
+          <div class="portfolio-desc">Waste recovery and recycling company—collection services for recyclables, confidential document disposal, and used cooking oil treatment.</div>
+          <div class="portfolio-tags">
+            <span class="portfolio-tech wp">WordPress</span>
+            <span class="portfolio-tech">Elementor</span>
+            <span class="portfolio-tech">Business</span>
+          </div>
+        </a>
+
+        <a href="https://www.electromall.net/en" target="_blank" rel="noreferrer" class="portfolio-card">
+          <div class="portfolio-top">
+            <div>
+              <div class="portfolio-name">ElectroMall</div>
+              <div class="portfolio-domain">electromall.net</div>
+            </div>
+            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
+          </div>
+          <div class="portfolio-desc">E-commerce retailer for electronics, mobiles, computers, and home appliances, with fast delivery and product warranty.</div>
+          <div class="portfolio-tags">
+            <span class="portfolio-tech">Next.js</span>
+            <span class="portfolio-tech">E-commerce</span>
+          </div>
+        </a>
+
+        <a href="https://www.teknagroupintl.com/" target="_blank" rel="noreferrer" class="portfolio-card">
+          <div class="portfolio-top">
+            <div>
+              <div class="portfolio-name">Tekna Group</div>
+              <div class="portfolio-domain">teknagroupintl.com</div>
+            </div>
+            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
+          </div>
+          <div class="portfolio-desc">Beirut-based luxury furniture brand—custom kitchens, wardrobes, bathroom vanities, surfaces, and climate solutions.</div>
+          <div class="portfolio-tags">
+            <span class="portfolio-tech">Custom Build</span>
+            <span class="portfolio-tech">Brand Site</span>
+          </div>
+        </a>
+
+        <a href="https://maisonvertelb.com" target="_blank" rel="noreferrer" class="portfolio-card">
+          <div class="portfolio-top">
+            <div>
+              <div class="portfolio-name">Maison Verte</div>
+              <div class="portfolio-domain">maisonvertelb.com</div>
+            </div>
+            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
+          </div>
+          <div class="portfolio-desc">Brand and product website for a Lebanese business.</div>
+          <div class="portfolio-tags">
+            <span class="portfolio-tech">Web</span>
+            <span class="portfolio-tech">Brand Site</span>
+          </div>
+        </a>
+
+        <a href="https://www.xiomlab.com/" target="_blank" rel="noreferrer" class="portfolio-card">
+          <div class="portfolio-top">
+            <div>
+              <div class="portfolio-name">Xiom Labs</div>
+              <div class="portfolio-domain">xiomlab.com</div>
+            </div>
+            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
+          </div>
+          <div class="portfolio-desc">Web design studio delivering clean, fast, modern websites for real businesses—without the agency price tag or the wait.</div>
+          <div class="portfolio-tags">
+            <span class="portfolio-tech">Custom Build</span>
+            <span class="portfolio-tech">Studio</span>
+          </div>
+        </a>
+
+        <a href="https://tryhala.ai" target="_blank" rel="noreferrer" class="portfolio-card">
+          <div class="portfolio-top">
+            <div>
+              <div class="portfolio-name">Hala AI</div>
+              <div class="portfolio-domain">tryhala.ai</div>
+            </div>
+            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
+          </div>
+          <div class="portfolio-desc">AI communications platform deploying voice agents that handle inbound and outbound calls 24/7 across voice, text, and WhatsApp.</div>
+          <div class="portfolio-tags">
+            <span class="portfolio-tech">AI Platform</span>
+            <span class="portfolio-tech">Automation</span>
+          </div>
+        </a>
+
+        <a href="https://metaempires.com" target="_blank" rel="noreferrer" class="portfolio-card">
+          <div class="portfolio-top">
+            <div>
+              <div class="portfolio-name">MetaEmpires</div>
+              <div class="portfolio-domain">metaempires.com</div>
+            </div>
+            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
+          </div>
+          <div class="portfolio-desc">Studio building AI products for real business workflows.</div>
+          <div class="portfolio-tags">
+            <span class="portfolio-tech">AI · Product</span>
+            <span class="portfolio-tech">Custom Build</span>
+          </div>
+        </a>
+
+        <a href="https://staxsai.com" target="_blank" rel="noreferrer" class="portfolio-card">
+          <div class="portfolio-top">
+            <div>
+              <div class="portfolio-name">StaxAI</div>
+              <div class="portfolio-domain">staxsai.com</div>
+            </div>
+            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
+          </div>
+          <div class="portfolio-desc">A unified interface consolidating access to multiple AI models—ChatGPT, Claude, and more—in one workspace.</div>
+          <div class="portfolio-tags">
+            <span class="portfolio-tech">AI · SaaS</span>
+            <span class="portfolio-tech">Custom Build</span>
+          </div>
+        </a>
+
+        <div class="portfolio-card offline">
+          <div class="portfolio-top">
+            <div>
+              <div class="portfolio-name">AlSayad</div>
+              <div class="portfolio-domain">alsayad.com</div>
+            </div>
+            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Offline</span>
+          </div>
+          <div class="portfolio-desc">Client website—currently offline. Available on request.</div>
+          <div class="portfolio-tags">
+            <span class="portfolio-tech">Web</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- Experience -->
     <section id="experience">
       <div class="section-header">
-        <span class="section-num">03</span>
+        <span class="section-num">04</span>
         <h2>Experience & Focus</h2>
       </div>
       <div class="exp-list">
@@ -997,7 +1305,7 @@
     <!-- Research -->
     <section id="research">
       <div class="section-header">
-        <span class="section-num">04</span>
+        <span class="section-num">05</span>
         <h2>Research</h2>
       </div>
       <div class="research-body">
@@ -1023,7 +1331,7 @@
     <!-- Contact -->
     <section id="contact">
       <div class="section-header">
-        <span class="section-num">05</span>
+        <span class="section-num">06</span>
         <h2>Contact</h2>
       </div>
       <div class="contact-body">
