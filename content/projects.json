@@ -1,0 +1,240 @@
+{
+  "categories": [
+    {
+      "id": "ai",
+      "name": "AI engineering"
+    },
+    {
+      "id": "realtime",
+      "name": "Real-time communications"
+    },
+    {
+      "id": "software",
+      "name": "Software engineering"
+    },
+    {
+      "id": "infrastructure",
+      "name": "DevOps and infrastructure"
+    }
+  ],
+  "projects": [
+    {
+      "slug": "hala-ai",
+      "title": "Hala AI",
+      "featured": true,
+      "period": {
+        "start": "2025-10",
+        "end": null
+      },
+      "type": "Company product",
+      "role": "Co-founder, engineering lead",
+      "status": "Live",
+      "categories": [
+        "ai",
+        "realtime",
+        "software"
+      ],
+      "tags": [
+        "Voice AI",
+        "Conversational systems",
+        "AI agents",
+        "AI integrations",
+        "Multi-tenant architecture"
+      ],
+      "summary": "A multi-tenant conversational-AI platform whose voice and text agents answer calls and chats, qualify leads and book appointments across phone, WhatsApp, Instagram, Facebook and web chat.",
+      "stack": [
+        "Python",
+        "FastAPI",
+        "TypeScript",
+        "LLM function calling",
+        "Speech-to-text",
+        "Text-to-speech"
+      ],
+      "links": {
+        "live": "https://tryhala.ai"
+      },
+      "repository_note": "Source is private.",
+      "body": "projects/hala-ai.md"
+    },
+    {
+      "slug": "staxai",
+      "title": "StaxAI",
+      "featured": false,
+      "period": null,
+      "type": "Product",
+      "role": null,
+      "status": "Live",
+      "categories": [
+        "ai"
+      ],
+      "tags": [
+        "LLM applications"
+      ],
+      "summary": "A unified interface that brings several AI models, including ChatGPT and Claude, into one workspace.",
+      "stack": [],
+      "links": {
+        "live": "https://staxsai.com"
+      },
+      "body": null
+    },
+    {
+      "slug": "petfindr",
+      "title": "PetFindr",
+      "featured": true,
+      "period": {
+        "start": "2023-06",
+        "end": "2024-05"
+      },
+      "type": "Open-source project",
+      "role": "Developer",
+      "status": null,
+      "categories": [
+        "software"
+      ],
+      "tags": [
+        "Full-stack application",
+        "API development",
+        "Database"
+      ],
+      "summary": "A web app for reporting found pets and searching for lost ones on an interactive map, with an Express API, MySQL storage and server-side captcha verification.",
+      "stack": [
+        "Node.js",
+        "Express",
+        "MySQL",
+        "JavaScript",
+        "Leaflet",
+        "Geoapify",
+        "hCaptcha",
+        "Multer"
+      ],
+      "links": {
+        "repo": "https://github.com/danielmadii/PetFindr-Finding-Lost-Pets-Webapp"
+      },
+      "image": {
+        "src": "/assets/img/projects/petfindr-screens",
+        "alt": "Three PetFindr mobile screens: the home page, the menu of services, and the form for posting a pet for adoption",
+        "width": 960,
+        "height": 540
+      },
+      "body": "projects/petfindr.md"
+    },
+    {
+      "slug": "helpdesk-ticketing",
+      "title": "Helpdesk ticketing system",
+      "featured": false,
+      "period": {
+        "start": "2023-11",
+        "end": "2023-12"
+      },
+      "type": "Open-source project",
+      "role": "Developer",
+      "status": null,
+      "categories": [
+        "software"
+      ],
+      "tags": [
+        "Backend systems",
+        "Database"
+      ],
+      "summary": "A support ticketing system in PHP and MySQL: ticket creation, listing, status updates and comments, with ticket queries through PDO prepared statements.",
+      "stack": [
+        "PHP",
+        "MySQL",
+        "PDO"
+      ],
+      "links": {
+        "repo": "https://github.com/danielmadii/Helpdesk-Ticketing-System-PHP-MySQL"
+      },
+      "body": null
+    },
+    {
+      "slug": "github-username-checker",
+      "title": "GitHub username availability checker",
+      "featured": false,
+      "period": {
+        "start": "2023-09",
+        "end": "2023-09"
+      },
+      "type": "Open-source project",
+      "role": "Developer",
+      "status": null,
+      "categories": [
+        "software"
+      ],
+      "tags": [
+        "Tooling"
+      ],
+      "summary": "A Python script that generates candidate usernames, checks their availability on GitHub in bulk, and saves the available ones to a file.",
+      "stack": [
+        "Python",
+        "requests",
+        "colorama"
+      ],
+      "links": {
+        "repo": "https://github.com/danielmadii/GitHub-Username-Availability-Checker"
+      },
+      "body": null
+    },
+    {
+      "slug": "client-web-platforms",
+      "title": "Client web platforms",
+      "featured": false,
+      "period": null,
+      "type": "Client work",
+      "role": "Design and development",
+      "status": "Live",
+      "categories": [
+        "software"
+      ],
+      "tags": [
+        "WordPress",
+        "E-commerce",
+        "Web platforms"
+      ],
+      "summary": "Live websites designed, built and shipped for businesses: WordPress builds, e-commerce and custom web platforms.",
+      "stack": [
+        "WordPress",
+        "PHP"
+      ],
+      "links": {},
+      "sites": [
+        {
+          "name": "Runwaste",
+          "href": "https://runwaste.com",
+          "summary": "Waste recovery and recycling: recyclables collection, confidential document disposal and used cooking oil treatment."
+        },
+        {
+          "name": "ElectroMall",
+          "href": "https://www.electromall.net/en",
+          "summary": "E-commerce retailer for electronics, mobiles, computers and home appliances."
+        },
+        {
+          "name": "Tekna Group",
+          "href": "https://www.teknagroupintl.com/",
+          "summary": "Beirut-based luxury furniture brand: custom kitchens, wardrobes, bathroom vanities, surfaces and climate solutions."
+        },
+        {
+          "name": "Maison Verte",
+          "href": "https://maisonvertelb.com",
+          "summary": "Flower delivery and plant shop in Lebanon."
+        },
+        {
+          "name": "Xiom Labs",
+          "href": "https://www.xiomlab.com/",
+          "summary": "Web design studio for clean, fast, modern websites."
+        },
+        {
+          "name": "Meta Empires",
+          "href": "https://metaempires.com",
+          "summary": "Studio website for Meta Empires."
+        },
+        {
+          "name": "AlSayad",
+          "href": null,
+          "summary": "Client website, currently offline. Available on request."
+        }
+      ],
+      "body": null
+    }
+  ]
+}

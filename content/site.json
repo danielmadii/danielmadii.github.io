@@ -1,0 +1,181 @@
+{
+  "name": "Daniel Madi",
+  "url": "https://danielmadii.github.io",
+  "repository": "https://github.com/danielmadii/danielmadii.github.io",
+  "description": "Daniel Madi is an engineer in Lebanon who builds production AI systems: voice and messaging agents, the integrations behind them, and the infrastructure they run on.",
+  "location": "Lebanon",
+  "email": "danielmadi96@gmail.com",
+  "jobTitle": "AI Engineer",
+  "worksFor": [
+    {
+      "name": "Meta Empires",
+      "url": "https://metaempires.com"
+    },
+    {
+      "name": "Layout Intl"
+    }
+  ],
+  "alumniOf": [
+    "Lebanese University",
+    "American University of Beirut"
+  ],
+  "portrait": {
+    "src": "/assets/img/portrait-480",
+    "alt": "Portrait of Daniel Madi"
+  },
+  "links": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/danielmadii"
+    },
+    {
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/danielmadi/"
+    },
+    {
+      "label": "X",
+      "href": "https://x.com/danielmadii"
+    },
+    {
+      "label": "Email",
+      "href": "mailto:danielmadi96@gmail.com"
+    },
+    {
+      "label": "CV (PDF)",
+      "href": "/assets/cv/Daniel-Madi-CV.pdf"
+    }
+  ],
+  "intro": [
+    "I'm an engineer in Lebanon. I build AI systems that run in production: [voice and messaging agents](/projects/hala-ai/), the [integrations](/experience/#layout-intl) that connect them to business software, and the [servers and data layers](/expertise/#infrastructure) underneath.",
+    "I co-founded [Meta Empires](/experience/#meta-empires), where I lead engineering on [Hala AI](/projects/hala-ai/), a multi-tenant platform whose agents answer calls and messages across phone, WhatsApp, Instagram and the web, and book appointments or update CRM records mid-conversation. I also work as a Technical Integration Engineer at [Layout Intl](/experience/#layout-intl), on client integrations, Linux server operations and incident response.",
+    "Security runs through all of it. I'm completing a [postgraduate diploma in cybersecurity](/experience/#education) at the American University of Beirut, hold [ISC2 and Fortinet certifications](/certifications/), and write up the [security findings](/security/) I report."
+  ],
+  "currently": [
+    {
+      "since": "2025-10",
+      "text": "Leading engineering on [Hala AI](/projects/hala-ai/) at Meta Empires"
+    },
+    {
+      "since": "2023-10",
+      "text": "Technical Integration Engineer at [Layout Intl](/experience/#layout-intl)"
+    },
+    {
+      "since": "2025",
+      "text": "Postgraduate Diploma in Cybersecurity, American University of Beirut (in progress)"
+    },
+    {
+      "since": null,
+      "text": "Preparing for [Claude Certified Architect – Foundations](/certifications/#ai-machine-learning), Anthropic"
+    }
+  ],
+  "domains": [
+    {
+      "name": "AI engineering",
+      "summary": "LLM agents that call tools against real systems, with prompts and context designed for production conversations.",
+      "evidence": [
+        {
+          "label": "Hala AI",
+          "href": "/projects/hala-ai/"
+        },
+        {
+          "label": "StaxAI",
+          "href": "/projects/staxai/"
+        }
+      ]
+    },
+    {
+      "name": "Voice AI and real-time communications",
+      "summary": "Low-latency voice pipelines with dialect-aware speech recognition and synthesis, and browser voice over WebRTC and TURN.",
+      "evidence": [
+        {
+          "label": "Hala AI voice pipeline",
+          "href": "/projects/hala-ai/#engineering"
+        },
+        {
+          "label": "Voice stack",
+          "href": "/expertise/#voice"
+        }
+      ]
+    },
+    {
+      "name": "AI agents and automation",
+      "summary": "Agents that book, update and look things up mid-conversation, and multi-step workflows in n8n, Make, Zapier and GoHighLevel.",
+      "evidence": [
+        {
+          "label": "Hala AI",
+          "href": "/projects/hala-ai/"
+        },
+        {
+          "label": "Automation stack",
+          "href": "/expertise/#automation"
+        }
+      ]
+    },
+    {
+      "name": "Backend development",
+      "summary": "Services in Python and FastAPI, TypeScript and Node.js, and PHP and Laravel, backed by MySQL and PostgreSQL.",
+      "evidence": [
+        {
+          "label": "PetFindr",
+          "href": "/projects/petfindr/"
+        },
+        {
+          "label": "Helpdesk ticketing system",
+          "href": "/projects/helpdesk-ticketing/"
+        }
+      ]
+    },
+    {
+      "name": "Systems integration",
+      "summary": "Connecting platforms through REST APIs and webhooks, and validating those connections end to end.",
+      "evidence": [
+        {
+          "label": "Layout Intl",
+          "href": "/experience/#layout-intl"
+        }
+      ]
+    },
+    {
+      "name": "DevOps and infrastructure",
+      "summary": "Linux servers on AWS, deployments on Vercel and Railway, hardened access, backups and tested restores.",
+      "evidence": [
+        {
+          "label": "Layout Intl",
+          "href": "/experience/#layout-intl"
+        },
+        {
+          "label": "Infrastructure stack",
+          "href": "/expertise/#infrastructure"
+        }
+      ]
+    },
+    {
+      "name": "Software engineering",
+      "summary": "Multi-tenant application architecture, and web platforms and CMS systems built for production reliability.",
+      "evidence": [
+        {
+          "label": "SpaceTech",
+          "href": "/experience/#spacetech"
+        },
+        {
+          "label": "Client web platforms",
+          "href": "/projects/client-web-platforms/"
+        }
+      ]
+    },
+    {
+      "name": "Cybersecurity and security research",
+      "summary": "Server hardening and access control at work, postgraduate study, and responsible disclosure of the flaws I find.",
+      "evidence": [
+        {
+          "label": "Security",
+          "href": "/security/"
+        },
+        {
+          "label": "Certifications",
+          "href": "/certifications/"
+        }
+      ]
+    }
+  ]
+}

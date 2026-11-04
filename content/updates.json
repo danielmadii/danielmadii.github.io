@@ -1,0 +1,151 @@
+{
+  "categories": [
+    {
+      "id": "professional",
+      "name": "Professional"
+    },
+    {
+      "id": "project",
+      "name": "Project"
+    },
+    {
+      "id": "credential",
+      "name": "Credential"
+    },
+    {
+      "id": "education",
+      "name": "Education"
+    },
+    {
+      "id": "writing",
+      "name": "Writing"
+    },
+    {
+      "id": "security",
+      "name": "Security"
+    },
+    {
+      "id": "open-source",
+      "name": "Open source"
+    }
+  ],
+  "updates": [
+    {
+      "date": "2026-05",
+      "category": "credential",
+      "text": "Earned Certified in Cybersecurity (CC) from ISC2.",
+      "ref": {
+        "label": "Details",
+        "href": "/certifications/#cybersecurity"
+      }
+    },
+    {
+      "date": "2026-05",
+      "category": "credential",
+      "text": "Earned Fortinet Certified Associate in Cybersecurity.",
+      "ref": {
+        "label": "Details",
+        "href": "/certifications/#cybersecurity"
+      }
+    },
+    {
+      "date": "2026-04",
+      "category": "credential",
+      "text": "Earned Fortinet Certified Fundamentals in Cybersecurity.",
+      "ref": {
+        "label": "Details",
+        "href": "/certifications/#cybersecurity"
+      }
+    },
+    {
+      "date": "2025-10",
+      "category": "professional",
+      "text": "Co-founded Meta Empires and began leading engineering on Hala AI.",
+      "ref": {
+        "label": "Project",
+        "href": "/projects/hala-ai/"
+      }
+    },
+    {
+      "date": "2025",
+      "category": "education",
+      "text": "Started the Postgraduate Diploma in Cybersecurity at the American University of Beirut.",
+      "ref": {
+        "label": "Details",
+        "href": "/experience/#education"
+      }
+    },
+    {
+      "date": "2023-11",
+      "category": "open-source",
+      "text": "Published a helpdesk ticketing system in PHP and MySQL.",
+      "ref": {
+        "label": "Project",
+        "href": "/projects/helpdesk-ticketing/"
+      }
+    },
+    {
+      "date": "2023-10",
+      "category": "professional",
+      "text": "Joined Layout Intl as Technical Integration Engineer.",
+      "ref": {
+        "label": "Details",
+        "href": "/experience/#layout-intl"
+      }
+    },
+    {
+      "date": "2023-09",
+      "category": "writing",
+      "text": "Published a guide to installing Kali Linux on Android without root.",
+      "ref": {
+        "label": "Read",
+        "href": "https://github.com/danielmadii/Kali-Linux-Android-noroot"
+      }
+    },
+    {
+      "date": "2023-09",
+      "category": "credential",
+      "text": "Earned the Google Cybersecurity Professional Certificate.",
+      "ref": {
+        "label": "Details",
+        "href": "/certifications/#cybersecurity"
+      }
+    },
+    {
+      "date": "2023-09",
+      "category": "open-source",
+      "text": "Released a GitHub username availability checker in Python.",
+      "ref": {
+        "label": "Project",
+        "href": "/projects/github-username-checker/"
+      }
+    },
+    {
+      "date": "2023-06",
+      "category": "open-source",
+      "text": "Started PetFindr, an open-source web app for reuniting lost pets with their owners.",
+      "ref": {
+        "label": "Project",
+        "href": "/projects/petfindr/"
+      }
+    },
+    {
+      "date": "2023",
+      "category": "education",
+      "text": "Completed a Bachelor's in Computer Science for Business Applications at Lebanese University.",
+      "ref": {
+        "label": "Details",
+        "href": "/experience/#education"
+      }
+    },
+    {
+      "date": "2021-10",
+      "category": "professional",
+      "text": "Joined SpaceTech as Software Engineer.",
+      "ref": {
+        "label": "Details",
+        "href": "/experience/#spacetech"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "publications": [
+    {
+      "slug": "kali-linux-android-no-root",
+      "title": "Installing Kali Linux on Android without root",
+      "date": "2023-09",
+      "category": "Tutorial",
+      "venue": "GitHub",
+      "summary": "A step-by-step guide to running a Kali Linux desktop on an unrooted Android device with Andronix, Termux and RealVNC Viewer, covering prerequisites, VNC server setup and the commands for restarting the environment.",
+      "url": "https://github.com/danielmadii/Kali-Linux-Android-noroot",
+      "note": "55 stars on GitHub as of November 2026.",
+      "body": null
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "groups": [
+    {
+      "id": "ai",
+      "name": "AI and LLM engineering",
+      "description": "Agents that use tools against real systems, and the prompts and context that keep them on task.",
+      "items": ["LLM APIs", "AI agents", "Function calling", "Prompt engineering", "Context engineering", "AI workflow architecture", "Claude Code"],
+      "evidence": [{ "label": "Hala AI", "href": "/projects/hala-ai/" }, { "label": "StaxAI", "href": "/projects/staxai/" }]
+    },
+    {
+      "id": "voice",
+      "name": "Voice AI and real-time communications",
+      "description": "Telephony and browser audio in, speech recognition and synthesis around an LLM, audio back out with low latency.",
+      "items": ["Twilio", "ElevenLabs", "Fish Audio", "Pipecat", "WebRTC", "TURN servers", "Speech-to-text and text-to-speech pipelines", "Real-time voice processing"],
+      "evidence": [{ "label": "Hala AI voice pipeline", "href": "/projects/hala-ai/#engineering" }]
+    },
+    {
+      "id": "automation",
+      "name": "Automation and integrations",
+      "description": "Multi-step workflows across business tools, and API integrations validated end to end.",
+      "items": ["n8n", "Make", "Zapier", "GoHighLevel", "Slack API and webhooks", "REST APIs", "Webhooks", "Third-party integrations", "Postman", "cURL"],
+      "evidence": [{ "label": "Layout Intl", "href": "/experience/#layout-intl" }]
+    },
+    {
+      "id": "backend",
+      "name": "Backend and databases",
+      "description": "API services and the data models behind them, from single-tenant apps to multi-tenant platforms.",
+      "items": ["Python", "FastAPI", "Node.js", "Express", "PHP", "Laravel", "SQL", "MySQL", "PostgreSQL", "PlanetScale", "API development", "Database architecture"],
+      "evidence": [{ "label": "Hala AI", "href": "/projects/hala-ai/" }, { "label": "PetFindr", "href": "/projects/petfindr/" }, { "label": "Helpdesk ticketing system", "href": "/projects/helpdesk-ticketing/" }]
+    },
+    {
+      "id": "web",
+      "name": "Development",
+      "description": "Front ends, full-stack applications and CMS platforms.",
+      "items": ["JavaScript", "TypeScript", "React", "WordPress", "Full-stack development", "Git", "GitHub"],
+      "evidence": [{ "label": "Client web platforms", "href": "/projects/client-web-platforms/" }, { "label": "SpaceTech", "href": "/experience/#spacetech" }]
+    },
+    {
+      "id": "infrastructure",
+      "name": "Infrastructure and deployment",
+      "description": "Servers, deployments and the operational work that keeps production running.",
+      "items": ["Linux server administration", "SSH", "AWS", "Docker", "CI/CD", "Vercel", "Railway", "Cloud infrastructure", "LAMP stack", "Log management", "Backups and disaster recovery", "Production troubleshooting"],
+      "evidence": [{ "label": "Layout Intl", "href": "/experience/#layout-intl" }]
+    },
+    {
+      "id": "security",
+      "name": "Cybersecurity",
+      "description": "Applied at work on production systems, and studied formally.",
+      "subgroups": [
+        { "name": "In practice", "items": ["Server hardening", "SSH policy controls", "MFA enforcement", "Role-based access control", "Security scripting", "Log analysis", "Disaster-recovery testing", "Encrypted credential storage", "Vulnerability research and responsible disclosure", "Kali Linux"] },
+        { "name": "In study", "items": ["Network and systems security", "Ethical hacking", "Threat analysis", "Defensive operations"] }
+      ],
+      "evidence": [{ "label": "Security", "href": "/security/" }, { "label": "Certifications", "href": "/certifications/" }]
+    }
+  ]
+}

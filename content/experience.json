@@ -1,0 +1,125 @@
+{
+  "work": [
+    {
+      "id": "meta-empires",
+      "organization": "Meta Empires",
+      "url": "https://metaempires.com",
+      "role": "AI Engineer & Co-Founder",
+      "type": "Co-founder",
+      "start": "2025-10",
+      "end": null,
+      "location": "Delaware, USA",
+      "summary": "Meta Empires is a studio building AI products for business workflows. I co-founded it and lead engineering on [Hala AI](/projects/hala-ai/).",
+      "responsibilities": [
+        "Lead engineering on Hala AI, a real-time voice and text conversational-AI platform across WhatsApp, Instagram and web voice channels, designed for multi-tenant scale."
+      ],
+      "contributions": [
+        "Engineered a low-latency voice pipeline in Python and FastAPI with real-time LLM interaction and a dialect-aware speech-to-text and text-to-speech path supporting 20+ languages and native Arabic dialects.",
+        "Implemented LLM function calling that books appointments and reads and writes CRM data mid-conversation across calendar and CRM integrations.",
+        "Architected a multi-tenant TypeScript and Python codebase with workspace-level isolation, encrypted tenant credentials and usage-based billing."
+      ],
+      "technologies": ["Python", "FastAPI", "TypeScript", "LLM function calling", "Speech-to-text", "Text-to-speech"]
+    },
+    {
+      "id": "layout-intl",
+      "organization": "Layout Intl",
+      "role": "Technical Integration Engineer",
+      "type": null,
+      "start": "2023-10",
+      "end": null,
+      "location": "Lebanon",
+      "summary": "Client integrations and the Linux infrastructure they run on, from implementation through incident response and handover.",
+      "responsibilities": [
+        "Implement production solutions on Linux-based infrastructure, REST APIs and LAMP-stack systems for client platforms and integrations.",
+        "Resolve website, CMS and Linux server incidents within a 30-minute SLA.",
+        "Support AWS-based project implementations and infrastructure operations.",
+        "Onboard and train client teams during deployments, producing documentation and walkthroughs for handover."
+      ],
+      "contributions": [
+        "Reduced incident resolution time by 20%.",
+        "Hardened servers with SSH policy controls, MFA enforcement, role-based access controls, security scripting and log rotation.",
+        "Implemented and validated disaster-recovery procedures: database backups, VM snapshots, restore testing, and API validation workflows in Postman and cURL."
+      ],
+      "technologies": ["Linux", "LAMP stack", "REST APIs", "AWS", "SSH", "MFA", "Postman", "cURL"]
+    },
+    {
+      "id": "spacetech",
+      "organization": "SpaceTech",
+      "role": "Software Engineer",
+      "type": null,
+      "start": "2021-10",
+      "end": "2023-09",
+      "location": "Lebanon",
+      "summary": "Web platforms and CMS-based systems for client-facing environments.",
+      "responsibilities": [
+        "Developed and maintained web platforms and CMS-based systems with a focus on performance, scalability and production reliability."
+      ],
+      "contributions": [
+        "Built responsive websites and backend-driven systems in Laravel and WordPress.",
+        "Improved performance and SEO, reducing page load time by 20%."
+      ],
+      "technologies": ["PHP", "Laravel", "WordPress"]
+    }
+  ],
+  "other": [
+    {
+      "id": "unicef-host",
+      "organization": "UNICEF",
+      "role": "Program Host",
+      "start": "2020-03",
+      "end": "2020-08",
+      "summary": "Hosted a mental-health awareness program during the pandemic featuring celebrity guests, with more than 1 million online views."
+    }
+  ],
+  "volunteering": [
+    {
+      "id": "unicef-par-support",
+      "organization": "UNICEF",
+      "role": "PAR Core Technical Support",
+      "start": "2024-04",
+      "end": "2024-04",
+      "summary": "Trained and mentored young researchers through data collection, analysis and reporting."
+    },
+    {
+      "id": "unicef-par-researcher",
+      "organization": "UNICEF",
+      "role": "PAR Researcher",
+      "start": "2019-09",
+      "end": "2024-04",
+      "summary": "Researched youth topics including mental health, education and child protection."
+    },
+    {
+      "id": "red-cross",
+      "organization": "Lebanese Red Cross",
+      "role": "Volunteer",
+      "start": "2019-11",
+      "end": "2020-11",
+      "summary": "Community awareness and youth initiatives."
+    }
+  ],
+  "education": [
+    {
+      "id": "aub",
+      "institution": "American University of Beirut",
+      "credential": "Postgraduate Diploma in Cybersecurity",
+      "status": "In progress",
+      "start": "2025",
+      "end": "2026",
+      "summary": "Network and systems security, ethical hacking, threat analysis and defensive operations."
+    },
+    {
+      "id": "lebanese-university",
+      "institution": "Lebanese University",
+      "credential": "Bachelor's in Computer Science for Business Applications",
+      "status": null,
+      "start": "2020",
+      "end": "2023",
+      "summary": null
+    }
+  ],
+  "languages": [
+    { "language": "Arabic", "level": "Native" },
+    { "language": "English", "level": "Full professional proficiency" },
+    { "language": "French", "level": "Intermediate" }
+  ]
+}

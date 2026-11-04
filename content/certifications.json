@@ -1,0 +1,102 @@
+{
+  "categories": [
+    { "id": "cybersecurity", "name": "Cybersecurity" },
+    { "id": "ai-machine-learning", "name": "AI and machine learning" },
+    { "id": "cloud-infrastructure", "name": "Cloud and infrastructure" },
+    { "id": "software-engineering", "name": "Software engineering" },
+    { "id": "networking", "name": "Networking" },
+    { "id": "professional-development", "name": "Professional development" }
+  ],
+  "kinds": [
+    { "id": "certification", "name": "Certification", "description": "A credential awarded by the issuer after an assessment." },
+    { "id": "course", "name": "Course certificate", "description": "Awarded for completing a course or program." },
+    { "id": "training", "name": "Training", "description": "Completed training without a separate credential." }
+  ],
+  "credentials": [
+    {
+      "name": "Certified in Cybersecurity (CC)",
+      "issuer": "ISC2",
+      "category": "cybersecurity",
+      "kind": "certification",
+      "issued": "2026-05",
+      "expires": null,
+      "credential_id": null,
+      "verify_url": null,
+      "badge": null,
+      "in_progress": false
+    },
+    {
+      "name": "Fortinet Certified Associate in Cybersecurity",
+      "issuer": "Fortinet",
+      "category": "cybersecurity",
+      "kind": "certification",
+      "issued": "2026-05",
+      "expires": null,
+      "credential_id": null,
+      "verify_url": null,
+      "badge": null,
+      "in_progress": false
+    },
+    {
+      "name": "Fortinet Certified Fundamentals in Cybersecurity",
+      "issuer": "Fortinet",
+      "category": "cybersecurity",
+      "kind": "certification",
+      "issued": "2026-04",
+      "expires": null,
+      "credential_id": null,
+      "verify_url": null,
+      "badge": null,
+      "in_progress": false
+    },
+    {
+      "name": "Google Cybersecurity Professional Certificate",
+      "issuer": "Google",
+      "category": "cybersecurity",
+      "kind": "course",
+      "issued": "2023-09",
+      "expires": null,
+      "credential_id": null,
+      "verify_url": null,
+      "badge": null,
+      "in_progress": false
+    },
+    {
+      "name": "Claude Certified Architect – Foundations (CCA-F)",
+      "issuer": "Anthropic",
+      "category": "ai-machine-learning",
+      "kind": "certification",
+      "issued": null,
+      "expires": null,
+      "credential_id": null,
+      "verify_url": null,
+      "badge": null,
+      "in_progress": true
+    },
+    {
+      "name": "Linux administration training for RHCSA, RHCE, LFCS, LPIC and CompTIA Linux+",
+      "issuer": null,
+      "category": "cloud-infrastructure",
+      "kind": "training",
+      "issued": null,
+      "expires": null,
+      "credential_id": null,
+      "verify_url": null,
+      "badge": null,
+      "in_progress": false
+    },
+    {
+      "name": "SEO AI automation training",
+      "issuer": null,
+      "category": "professional-development",
+      "kind": "training",
+      "issued": null,
+      "expires": null,
+      "credential_id": null,
+      "verify_url": null,
+      "badge": null,
+      "in_progress": false
+    }
+  ],
+  "achievements": []
+}

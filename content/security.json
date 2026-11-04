@@ -1,0 +1,35 @@
+{
+  "evidence_levels": [
+    { "id": "confirmed", "name": "Confirmed", "description": "Acknowledged or fixed by the affected vendor." },
+    { "id": "reported", "name": "Reported", "description": "Submitted to the vendor through a disclosure program; no public outcome yet." },
+    { "id": "research", "name": "Independent research", "description": "My own investigation, not submitted to a vendor." },
+    { "id": "analysis", "name": "Theoretical analysis", "description": "Reasoned analysis without a working demonstration." }
+  ],
+  "severities": ["critical", "high", "medium", "low", "informational", "unrated"],
+  "findings": [
+    {
+      "slug": "x-group-chat-membership-enumeration",
+      "title": "X group chat membership enumeration flaw",
+      "summary": "Former group chat membership could still be used to infer whether a target user remained inside the chat.",
+      "affected": "X (formerly Twitter) group direct messages",
+      "category": "Information disclosure (membership enumeration)",
+      "severity": "unrated",
+      "cvss": null,
+      "evidence": "reported",
+      "discovered": null,
+      "disclosure": {
+        "status": "Reported through HackerOne",
+        "platform": "HackerOne",
+        "report_id": "3620487",
+        "public_url": null
+      },
+      "references": [],
+      "body": "security/x-group-chat-membership-enumeration.md"
+    }
+  ],
+  "practice": [
+    "Hardened production Linux servers at Layout Intl with SSH policy controls, MFA enforcement, role-based access controls, security scripting and log rotation.",
+    "Implemented and validated disaster-recovery procedures, including database backups, VM snapshots and restore testing.",
+    "Designed Hala AI's tenancy model around workspace-level isolation and encrypted tenant credentials."
+  ]
+}

@@ -1,1377 +1,164 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Daniel Madi</title>
-  <meta name="description" content="Daniel Madi — engineer building AI systems, automation, and modern software products." />
-  <meta property="og:title" content="Daniel Madi" />
-  <meta property="og:description" content="Engineer building AI systems, automation, and modern software products." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0b0b0b" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%230b0b0b'/%3E%3Ccircle cx='32' cy='32' r='22' fill='%23c8ff57'/%3E%3Cpath d='M21 42V22h8.4c8.4 0 13.6 3.8 13.6 10S37.8 42 29.4 42H21zm6-4h2c5.2 0 8.1-2 8.1-6s-2.9-6-8.1-6h-2v12z' fill='%230b0b0b'/%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #09090f;
-      --surface: rgba(17, 18, 28, 0.92);
-      --surface-strong: rgba(24, 26, 40, 0.98);
-      --border: rgba(130, 148, 255, 0.16);
-      --text: #d8def7;
-      --muted: #8f98bf;
-      --heading: #f7f8ff;
-      --accent: #c8ff57;
-      --accent-dim: rgba(200,255,87,0.08);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'IBM Plex Mono', monospace;
-      background: var(--bg);
-      color: var(--text);
-      font-size: 14px;
-      line-height: 1.9;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-    }
-
-    /* Noise overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.025;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 3px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
-
-    /* =========================================
-       LAYOUT — Desktop default
-    ========================================== */
-    .wrapper {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 28px;
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 0;
-      min-height: 100vh;
-    }
-
-    /* aside-top collapses on desktop — logo & button become direct flex children of aside */
-    .aside-top {
-      display: contents;
-    }
-
-    .mobile-menu-toggle {
-      display: none;
-    }
-
-    /* Sidebar */
-    aside {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      border-right: 1px solid var(--border);
-      padding: 48px 32px 48px 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--heading);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-dot {
-      width: 7px;
-      height: 7px;
-      background: var(--accent);
-      box-shadow: 0 0 18px rgba(124,58,237,0.45);
-      border-radius: 50%;
-      flex-shrink: 0;
-      animation: pulse 3s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(124,58,237,0.45); }
-      50% { opacity: 0.95; transform: scale(0.92); box-shadow: 0 0 0 8px rgba(0,245,212,0); }
-    }
-
-    nav {
-      margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 7px 0;
-      transition: color 0.2s;
-      position: relative;
-      min-height: 44px; /* touch target */
-    }
-
-    .nav-item .num {
-      font-size: 10px;
-      opacity: 0.5;
-      font-style: italic;
-    }
-
-    .nav-item:hover { color: var(--heading); }
-    .nav-item.active { color: var(--accent); }
-    .nav-item.active .num { opacity: 1; }
-
-    .nav-item::after {
-      content: '';
-      position: absolute;
-      left: -32px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 0;
-      height: 1px;
-      background: var(--accent);
-      transition: width 0.3s ease;
-    }
-
-    .nav-item.active::after,
-    .nav-item:hover::after { width: 20px; }
-
-    .sidebar-links {
-      margin-top: auto;
-      padding-top: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .sidebar-link {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 36px;
-    }
-
-    .sidebar-link svg { flex-shrink: 0; transition: color 0.2s; }
-    .sidebar-link:hover { color: var(--accent); }
-
-    /* Mobile nav panel hidden on desktop */
-    .mobile-nav-panel {
-      display: contents;
-    }
-
-    /* Main */
-    main {
-      padding: 48px 0 0 52px;
-      min-width: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Sections */
-    section {
-      padding: 60px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    section:last-child { border-bottom: none; }
-
-    /* Hero */
-    .hero {
-      padding-top: 8px;
-    }
-
-    .hero-label {
-      font-size: 11px;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .hero-label::after {
-      content: '';
-      height: 1px;
-      width: 32px;
-      background: var(--accent);
-      opacity: 0.5;
-    }
-
-    .hero-avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 16px;
-      background: var(--surface-strong);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 0.05em;
-      margin-bottom: 24px;
-      overflow: hidden;
-    }
-
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(38px, 6vw, 64px);
-      font-weight: 800;
-      color: var(--heading);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 24px;
-    }
-
-    h1 em {
-      font-style: normal;
-      background: var(--accent);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-desc {
-      max-width: 560px;
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--text);
-      margin-bottom: 14px;
-    }
-
-    .hero-sub {
-      max-width: 520px;
-      font-size: 13px;
-      line-height: 1.9;
-      color: var(--muted);
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 28px;
-    }
-
-    .tag {
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      color: var(--muted);
-      background: var(--surface-strong);
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .tag:hover { border-color: var(--accent); color: var(--accent); }
-
-    /* Section headers */
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 40px;
-    }
-
-    h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--heading);
-      letter-spacing: -0.02em;
-    }
-
-    .section-num {
-      font-size: 11px;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      font-style: italic;
-    }
-
-    /* About */
-    .about-body {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      max-width: 600px;
-    }
-
-    .about-body p { font-size: 14px; line-height: 2; color: var(--text); }
-
-    /* Projects */
-    .projects-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .project-card {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: start;
-      padding: 22px 20px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: transparent;
-      transition: background 0.2s, border-color 0.2s;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--accent);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .project-card:hover {
-      background: var(--accent-dim);
-      border-color: rgba(124,58,237,0.38);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.28), 0 0 0 1px rgba(0,245,212,0.08);
-    }
-
-    .project-card:hover::before { opacity: 1; }
-
-    .project-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--heading);
-      margin-bottom: 6px;
-      letter-spacing: -0.01em;
-    }
-
-    .project-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .project-meta {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    .project-arrow {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--accent);
-      opacity: 0;
-      transition: opacity 0.2s;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-
-    .project-card:hover .project-arrow { opacity: 1; }
-
-    /* =========================================
-       Portfolio
-    ========================================== */
-    .portfolio-intro {
-      max-width: 600px;
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.9;
-      margin-bottom: 28px;
-    }
-
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .portfolio-card {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 22px 20px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      background: transparent;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .portfolio-card::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--accent);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .portfolio-card:not(.offline):hover {
-      background: var(--accent-dim);
-      border-color: rgba(124,58,237,0.38);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.28), 0 0 0 1px rgba(0,245,212,0.08);
-    }
-
-    .portfolio-card:not(.offline):hover::before { opacity: 1; }
-
-    .portfolio-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .portfolio-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--heading);
-      letter-spacing: -0.01em;
-      margin-bottom: 4px;
-    }
-
-    .portfolio-domain {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-      word-break: break-all;
-    }
-
-    .portfolio-live {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .portfolio-live-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 10px rgba(200,255,87,0.5);
-      flex-shrink: 0;
-    }
-
-    .portfolio-card.offline .portfolio-live-dot {
-      background: #ff6b6b;
-      box-shadow: none;
-    }
-
-    .portfolio-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.8;
-      flex: 1;
-    }
-
-    .portfolio-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      align-items: center;
-      margin-top: auto;
-    }
-
-    .portfolio-tech {
-      font-size: 10px;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--muted);
-      background: var(--surface-strong);
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .portfolio-tech.wp {
-      border-color: rgba(200,255,87,0.4);
-      background: rgba(200,255,87,0.1);
-      color: var(--accent);
-      box-shadow: 0 0 16px rgba(200,255,87,0.08);
-    }
-
-    .portfolio-card.offline {
-      opacity: 0.6;
-      cursor: default;
-    }
-
-    /* Experience */
-    .exp-list {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      max-width: 580px;
-    }
-
-    .exp-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--heading);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .exp-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .exp-desc { font-size: 13px; color: var(--muted); line-height: 1.9; }
-
-    /* Research */
-    .research-body {
-      max-width: 580px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .research-body p { font-size: 14px; color: var(--muted); line-height: 2; }
-
-    .research-coming {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px dashed var(--border);
-      border-radius: 3px;
-      padding: 8px 14px;
-      margin-top: 12px;
-    }
-
-    .research-keywords {
-      padding-left: 13px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 2px;
-    }
-
-    .research-keyword {
-      display: inline-flex;
-      align-items: center;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(200,255,87,0.28);
-      background: rgba(200,255,87,0.1);
-      color: var(--accent);
-      font-size: 10px;
-      line-height: 1;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      box-shadow: 0 0 18px rgba(200,255,87,0.08);
-    }
-
-    .research-coming-dot {
-      width: 5px;
-      height: 5px;
-      background: var(--muted);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    /* Contact */
-    #contact {
-      display: flex;
-      flex-direction: column;
-      min-height: max(420px, calc(100vh - 96px));
-      padding-bottom: 0;
-    }
-
-    .contact-body { max-width: 520px; }
-
-    .contact-body p { font-size: 14px; color: var(--muted); line-height: 2; margin-bottom: 28px; }
-
-    .contact-links {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--heading);
-      text-decoration: none;
-      padding: 10px 20px;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      background: var(--surface-strong);
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
-      min-height: 44px;
-    }
-
-    .contact-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-dim);
-    }
-
-    /* Status bar */
-    .status-bar {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 12px 0 16px;
-      border-top: 1px solid var(--border);
-      margin-top: auto;
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      animation: pulse 2.5s ease-in-out infinite;
-    }
-
-    /* Animations */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero { animation: fadeUp 0.7s ease forwards; }
-
-    /* =========================================
-       MOBILE — max-width: 768px
-    ========================================= */
-    @media (max-width: 768px) {
-
-      .wrapper {
-        display: block;
-        max-width: 100%;
-        min-height: auto;
-        padding: 0;
-      }
-
-      /* === Sidebar → sticky top bar === */
-      aside {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        width: 100%;
-        height: auto;
-        min-height: 0;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 0 20px;
-        margin: 0;
-        background: rgba(9, 9, 15, 0.96);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        flex-direction: column;
-        display: flex;
-      }
-
-      .aside-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        min-height: 58px;
-      }
-
-      /* Show hamburger */
-      .mobile-menu-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        border: 1px solid var(--border);
-        background: var(--surface-strong);
-        color: var(--heading);
-        border-radius: 10px;
-        cursor: pointer;
-        flex-shrink: 0;
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-      }
-
-      .mobile-menu-toggle svg {
-        width: 18px;
-        height: 18px;
-      }
-
-      /* Nav panel collapses */
-      .mobile-nav-panel {
-        display: none;
-        padding: 8px 0 16px;
-        border-top: 1px solid var(--border);
-        margin-top: 0;
-      }
-
-      aside.mobile-open .mobile-nav-panel {
-        display: block;
-      }
-
-      nav {
-        margin-top: 0;
-        gap: 0;
-      }
-
-      .nav-item {
-        padding: 14px 0;
-        min-height: 52px;
-        font-size: 13px;
-        border-bottom: 1px solid rgba(130, 148, 255, 0.08);
-      }
-
-      .nav-item:last-child {
-        border-bottom: none;
-      }
-
-      .nav-item::after {
-        display: none;
-      }
-
-      .sidebar-links {
-        margin-top: 0;
-        padding-top: 16px;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 8px 20px;
-        border-top: 1px solid rgba(130, 148, 255, 0.08);
-      }
-
-      .sidebar-link {
-        min-height: 44px;
-        font-size: 11px;
-      }
-
-      /* === Main content === */
-      main {
-        display: block;
-        min-width: 0;
-        min-height: 0;
-        padding: 0 20px;
-      }
-
-      section {
-        padding: 44px 0;
-      }
-
-      .hero {
-        padding-top: 36px;
-      }
-
-      .hero-avatar {
-        width: 80px;
-        height: 80px;
-        border-radius: 14px;
-        margin-bottom: 20px;
-      }
-
-      h1 {
-        font-size: clamp(36px, 10vw, 52px);
-        line-height: 1.06;
-        margin-bottom: 20px;
-        letter-spacing: -0.025em;
-      }
-
-      .hero-tags {
-        gap: 7px;
-        margin-top: 22px;
-      }
-
-      .tag {
-        font-size: 10px;
-        padding: 6px 10px;
-        min-height: 32px;
-        display: inline-flex;
-        align-items: center;
-      }
-
-      .section-header {
-        margin-bottom: 28px;
-        gap: 12px;
-      }
-
-      h2 {
-        font-size: 20px;
-      }
-
-      .about-body,
-      .exp-list,
-      .research-body,
-      .contact-body {
-        max-width: 100%;
-      }
-
-      .about-body p,
-      .exp-desc,
-      .contact-body p {
-        font-size: 13px;
-        line-height: 1.85;
-      }
-
-      /* Project card — single column, always show arrow */
-      .project-card {
-        grid-template-columns: 1fr;
-        padding: 20px 16px;
-        gap: 12px;
-      }
-
-      .project-meta {
-        order: -1;
-        margin-bottom: 4px;
-      }
-
-      .project-arrow {
-        opacity: 1; /* always visible on touch */
-        margin-top: 10px;
-      }
-
-      .project-desc {
-        font-size: 12px;
-        line-height: 1.8;
-      }
-
-      /* Portfolio — single column on mobile */
-      .portfolio-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .portfolio-card {
-        padding: 20px 16px;
-      }
-
-      .portfolio-desc {
-        font-size: 12px;
-        line-height: 1.8;
-      }
-
-      /* Research */
-      .research-coming {
-        width: 100%;
-        padding: 14px 14px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        align-items: flex-start;
-      }
-
-      /* Contact links — full width stacked */
-      .contact-links {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .contact-link {
-        width: 100%;
-        justify-content: center;
-        padding: 14px 20px;
-        font-size: 12px;
-      }
-
-      #contact {
-        min-height: auto;
-      }
-
-      .status-bar {
-        padding: 16px 0 24px;
-        font-size: 10px;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .exp-list {
-        gap: 28px;
-      }
-
-    }
-
-    /* =========================================
-       EXTRA SMALL — max-width: 390px
-    ========================================= */
-    @media (max-width: 390px) {
-
-      main {
-        padding: 0 16px;
-      }
-
-      aside {
-        padding: 0 16px;
-      }
-
-      h1 {
-        font-size: 34px;
-      }
-
-      .hero {
-        padding-top: 28px;
-      }
-
-      .tag {
-        font-size: 9px;
-        padding: 5px 8px;
-      }
-
-      .about-body p,
-      .exp-desc,
-      .contact-body p,
-      .project-desc,
-      .portfolio-desc {
-        font-size: 12px;
-      }
-
-      h2 {
-        font-size: 18px;
-      }
-
-      .project-card,
-      .portfolio-card {
-        padding: 16px 14px;
-      }
-
-      .contact-link {
-        padding: 13px 16px;
-        font-size: 11px;
-        letter-spacing: 0.06em;
-      }
-
-      .sidebar-links {
-        gap: 6px 16px;
-      }
-
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daniel Madi — AI, infrastructure and security engineering</title>
+<meta name="description" content="Daniel Madi is an engineer in Lebanon who builds production AI systems: voice and messaging agents, the integrations behind them, and the infrastructure they run on.">
+<link rel="canonical" href="https://danielmadii.github.io/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101213">
+<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.dataset.theme=t;}catch(e){}})();</script>
+<link rel="preload" href="/assets/fonts/literata-opsz.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css?v=93df7be2b9">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="Daniel Madi: updates" href="/feed.xml">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Daniel Madi">
+<meta property="og:title" content="Daniel Madi">
+<meta property="og:description" content="Daniel Madi is an engineer in Lebanon who builds production AI systems: voice and messaging agents, the integrations behind them, and the infrastructure they run on.">
+<meta property="og:url" content="https://danielmadii.github.io/">
+<meta property="og:image" content="https://danielmadii.github.io/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Daniel Madi: AI, infrastructure and security engineering">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@danielmadii">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Daniel Madi","url":"https://danielmadii.github.io/","image":"https://danielmadii.github.io/assets/img/portrait-480.jpg","jobTitle":"AI Engineer","description":"Daniel Madi is an engineer in Lebanon who builds production AI systems: voice and messaging agents, the integrations behind them, and the infrastructure they run on.","worksFor":[{"@type":"Organization","name":"Meta Empires","url":"https://metaempires.com"},{"@type":"Organization","name":"Layout Intl"}],"alumniOf":[{"@type":"EducationalOrganization","name":"Lebanese University"},{"@type":"EducationalOrganization","name":"American University of Beirut"}],"address":{"@type":"PostalAddress","addressCountry":"LB"},"sameAs":["https://github.com/danielmadii","https://www.linkedin.com/in/danielmadi/","https://x.com/danielmadii"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Daniel Madi","url":"https://danielmadii.github.io/"}</script>
+<script src="/assets/js/site.js?v=85ece409c8" defer></script>
 </head>
 <body>
 
-<div class="wrapper">
-  <aside id="site-aside">
-    <div class="aside-top">
-      <a href="#top" class="logo">
-        <span class="logo-dot"></span>
-        Daniel Madi
-      </a>
-      <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-panel">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-          <path d="M4 7h16M4 12h16M4 17h16"/>
-        </svg>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="wordmark" href="/">Daniel Madi</a>
+    <div class="masthead-tools">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+      <button class="theme-toggle" type="button" hidden>
+        <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg>
+        <span class="theme-toggle-label">Dark theme</span>
       </button>
     </div>
-
-    <div class="mobile-nav-panel" id="mobile-nav-panel">
-    <nav id="main-nav">
-      <a href="#about" class="nav-item" data-section="about">
-        <span class="num">01</span> About
-      </a>
-      <a href="#projects" class="nav-item" data-section="projects">
-        <span class="num">02</span> Projects
-      </a>
-      <a href="#portfolio" class="nav-item" data-section="portfolio">
-        <span class="num">03</span> Portfolio
-      </a>
-      <a href="#experience" class="nav-item" data-section="experience">
-        <span class="num">04</span> Experience
-      </a>
-      <a href="#research" class="nav-item" data-section="research">
-        <span class="num">05</span> Research
-      </a>
-      <a href="#contact" class="nav-item" data-section="contact">
-        <span class="num">06</span> Contact
-      </a>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="/" aria-current="page">Overview</a></li><li><a href="/experience/">Experience</a></li><li><a href="/projects/">Projects</a></li><li><a href="/expertise/">Expertise</a></li><li><a href="/security/">Security</a></li><li><a href="/writing/">Writing</a></li><li><a href="/certifications/">Certifications</a></li><li><a href="/updates/">Updates</a></li><li><a href="/cv/">CV</a></li>
+      </ul>
     </nav>
+  </div>
+</header>
+<main id="main" class="page" tabindex="-1">
 
-    <div class="sidebar-links">
-      <a href="https://github.com/danielmadii" target="_blank" rel="noreferrer" class="sidebar-link">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-        </svg>
-        GitHub
-      </a>
-      <a href="https://www.linkedin.com/in/danielmadi/" target="_blank" rel="noreferrer" class="sidebar-link">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
-        LinkedIn
-      </a>
-      <a href="https://x.com/danielmadii" target="_blank" rel="noreferrer" class="sidebar-link">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.213 5.567 5.95-5.567zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
-        X
-      </a>
-    </div>
-    </div>
-  </aside>
+<section class="intro" aria-labelledby="intro-title">
+  <div class="intro-portrait">
+    
+<picture class="portrait">
+  <source type="image/webp" srcset="/assets/img/portrait-480.webp">
+  <img src="/assets/img/portrait-480.jpg" alt="Portrait of Daniel Madi" width="480" height="480" loading="eager" decoding="async">
+</picture>
+  </div>
+  <div class="intro-text">
+    <h1 id="intro-title" class="intro-name">Daniel Madi</h1>
+    <p class="intro-role">AI, infrastructure and security engineering</p>
+    <div class="lede"><p>I&#39;m an engineer in Lebanon. I build AI systems that run in production: <a href="/projects/hala-ai/">voice and messaging agents</a>, the <a href="/experience/#layout-intl">integrations</a> that connect them to business software, and the <a href="/expertise/#infrastructure">servers and data layers</a> underneath.</p><p>I co-founded <a href="/experience/#meta-empires">Meta Empires</a>, where I lead engineering on <a href="/projects/hala-ai/">Hala AI</a>, a multi-tenant platform whose agents answer calls and messages across phone, WhatsApp, Instagram and the web, and book appointments or update CRM records mid-conversation. I also work as a Technical Integration Engineer at <a href="/experience/#layout-intl">Layout Intl</a>, on client integrations, Linux server operations and incident response.</p><p>Security runs through all of it. I&#39;m completing a <a href="/experience/#education">postgraduate diploma in cybersecurity</a> at the American University of Beirut, hold <a href="/certifications/">ISC2 and Fortinet certifications</a>, and write up the <a href="/security/">security findings</a> I report.</p></div>
+    <ul class="profile-links"><li><a href="https://github.com/danielmadii">GitHub</a></li><li><a href="https://www.linkedin.com/in/danielmadi/">LinkedIn</a></li><li><a href="https://x.com/danielmadii">X</a></li><li><a href="mailto:danielmadi96@gmail.com">Email</a></li><li><a href="/assets/cv/Daniel-Madi-CV.pdf">CV (PDF)</a></li></ul>
+  </div>
+</section>
 
-  <main id="top">
 
-    <!-- Hero -->
-    <section class="hero visible">
-      <div class="hero-avatar"><img src="assets/1775162693811.png" alt="Daniel Madi" style="width:100%;height:100%;object-fit:cover;" /></div>
-      <h1>Daniel <em>Madi</em></h1>
-      <div class="hero-tags">
-        <span class="tag">AI Systems</span>
-        <span class="tag">Automation</span>
-        <span class="tag">Full-Stack</span>
-        <span class="tag">Security</span>
-        <span class="tag">Product Engineering</span>
-      </div>
-    </section>
+<section class="block " id="currently" aria-labelledby="currently-title">
+  <h2 class="block-title" id="currently-title">Currently</h2>
+  
+  <ul class="rows rows-compact"><li class="row"><div class="row-meta">Since <time datetime="2025-10">Oct 2025</time></div><div class="row-body"><p>Leading engineering on <a href="/projects/hala-ai/">Hala AI</a> at Meta Empires</p></div></li><li class="row"><div class="row-meta">Since <time datetime="2023-10">Oct 2023</time></div><div class="row-body"><p>Technical Integration Engineer at <a href="/experience/#layout-intl">Layout Intl</a></p></div></li><li class="row"><div class="row-meta">Since <time datetime="2025">2025</time></div><div class="row-body"><p>Postgraduate Diploma in Cybersecurity, American University of Beirut (in progress)</p></div></li><li class="row"><div class="row-meta">In progress</div><div class="row-body"><p>Preparing for <a href="/certifications/#ai-machine-learning">Claude Certified Architect – Foundations</a>, Anthropic</p></div></li></ul>
+</section>
 
-    <!-- About -->
-    <section id="about">
-      <div class="section-header">
-        <span class="section-num">01</span>
-        <h2>About</h2>
-      </div>
-      <div class="about-body">
-        <p>
-          I build systems that compress complexity into execution. My work sits at the intersection of AI, product engineering, automation, and infrastructure—where ideas either become operational leverage or die as noise.
-        </p>
-        <p>
-          I care about products that do real work: interfaces that clarify, architectures that endure, and workflows that remove drag instead of adding theater. That means thinking in systems, not pages; in outcomes, not features.
-        </p>
-        <p>
-          This site reflects that philosophy. Minimal by choice, direct by design, and structured around signal rather than decoration.
-        </p>
-      </div>
-    </section>
 
-    <!-- Projects -->
-    <section id="projects">
-      <div class="section-header">
-        <span class="section-num">02</span>
-        <h2>Projects</h2>
-      </div>
-      <div class="projects-grid">
+<section class="block " id="domains" aria-labelledby="domains-title">
+  <h2 class="block-title" id="domains-title">What I work on</h2>
+  
+  <dl class="domains"><div class="domain"><dt>AI engineering</dt><dd><p>LLM agents that call tools against real systems, with prompts and context designed for production conversations.</p><p class="evidence"><span class="evidence-label">See:</span> <a href="/projects/hala-ai/">Hala AI</a>, <a href="/projects/staxai/">StaxAI</a></p></dd></div><div class="domain"><dt>Voice AI and real-time communications</dt><dd><p>Low-latency voice pipelines with dialect-aware speech recognition and synthesis, and browser voice over WebRTC and TURN.</p><p class="evidence"><span class="evidence-label">See:</span> <a href="/projects/hala-ai/#engineering">Hala AI voice pipeline</a>, <a href="/expertise/#voice">Voice stack</a></p></dd></div><div class="domain"><dt>AI agents and automation</dt><dd><p>Agents that book, update and look things up mid-conversation, and multi-step workflows in n8n, Make, Zapier and GoHighLevel.</p><p class="evidence"><span class="evidence-label">See:</span> <a href="/projects/hala-ai/">Hala AI</a>, <a href="/expertise/#automation">Automation stack</a></p></dd></div><div class="domain"><dt>Backend development</dt><dd><p>Services in Python and FastAPI, TypeScript and Node.js, and PHP and Laravel, backed by MySQL and PostgreSQL.</p><p class="evidence"><span class="evidence-label">See:</span> <a href="/projects/petfindr/">PetFindr</a>, <a href="/projects/helpdesk-ticketing/">Helpdesk ticketing system</a></p></dd></div><div class="domain"><dt>Systems integration</dt><dd><p>Connecting platforms through REST APIs and webhooks, and validating those connections end to end.</p><p class="evidence"><span class="evidence-label">See:</span> <a href="/experience/#layout-intl">Layout Intl</a></p></dd></div><div class="domain"><dt>DevOps and infrastructure</dt><dd><p>Linux servers on AWS, deployments on Vercel and Railway, hardened access, backups and tested restores.</p><p class="evidence"><span class="evidence-label">See:</span> <a href="/experience/#layout-intl">Layout Intl</a>, <a href="/expertise/#infrastructure">Infrastructure stack</a></p></dd></div><div class="domain"><dt>Software engineering</dt><dd><p>Multi-tenant application architecture, and web platforms and CMS systems built for production reliability.</p><p class="evidence"><span class="evidence-label">See:</span> <a href="/experience/#spacetech">SpaceTech</a>, <a href="/projects/client-web-platforms/">Client web platforms</a></p></dd></div><div class="domain"><dt>Cybersecurity and security research</dt><dd><p>Server hardening and access control at work, postgraduate study, and responsible disclosure of the flaws I find.</p><p class="evidence"><span class="evidence-label">See:</span> <a href="/security/">Security</a>, <a href="/certifications/">Certifications</a></p></dd></div></dl>
+</section>
 
-        <a href="https://tryhala.ai" target="_blank" rel="noreferrer" class="project-card">
-          <div>
-            <div class="project-name">Hala AI · tryhala.ai</div>
-            <div class="project-desc">Hala AI is an AI communications platform built to replace slow, fragmented customer operations with intelligent execution. It captures inbound demand, qualifies leads, answers repetitive questions, routes intent, and books actions across channels like web and WhatsApp. The objective is simple: reduce response latency, increase conversion, and turn communication from operational overhead into a scalable growth layer.</div>
-            <div class="project-arrow">View platform ↗</div>
-          </div>
-          <div class="project-meta">AI · Automation</div>
-        </a>
 
-      </div>
-    </section>
+<section class="block " id="selected-projects" aria-labelledby="selected-projects-title">
+  <h2 class="block-title" id="selected-projects-title">Selected projects</h2>
+  
+  <ul class="rows"><li class="row">
+  <div class="row-meta">Oct 2025 – present</div>
+  <div class="row-body">
+    <h3 class="row-title"><a href="/projects/hala-ai/">Hala AI</a></h3>
+    <p class="row-kind">Company product, Live</p>
+    <p>A multi-tenant conversational-AI platform whose voice and text agents answer calls and chats, qualify leads and book appointments across phone, WhatsApp, Instagram, Facebook and web chat.</p>
+    <p class="row-stack">Python, FastAPI, TypeScript, LLM function calling, Speech-to-text, Text-to-speech</p>
+  </div>
+</li><li class="row">
+  <div class="row-meta">Jun 2023 – May 2024</div>
+  <div class="row-body">
+    <h3 class="row-title"><a href="/projects/petfindr/">PetFindr</a></h3>
+    <p class="row-kind">Open-source project</p>
+    <p>A web app for reporting found pets and searching for lost ones on an interactive map, with an Express API, MySQL storage and server-side captcha verification.</p>
+    <p class="row-stack">Node.js, Express, MySQL, JavaScript, Leaflet, Geoapify, hCaptcha, Multer</p>
+  </div>
+</li></ul>
+  <p class="more"><a href="/projects/">All projects</a></p>
+</section>
 
-    <!-- Portfolio -->
-    <section id="portfolio">
-      <div class="section-header">
-        <span class="section-num">03</span>
-        <h2>Portfolio</h2>
-      </div>
-      <p class="portfolio-intro">
-        A selection of live websites I've designed, built, and shipped—spanning WordPress builds, e-commerce, and custom web platforms for real businesses.
-      </p>
-      <div class="portfolio-grid">
 
-        <a href="https://runwaste.com" target="_blank" rel="noreferrer" class="portfolio-card">
-          <div class="portfolio-top">
-            <div>
-              <div class="portfolio-name">Runwaste</div>
-              <div class="portfolio-domain">runwaste.com</div>
-            </div>
-            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
-          </div>
-          <div class="portfolio-desc">Waste recovery and recycling company—collection services for recyclables, confidential document disposal, and used cooking oil treatment.</div>
-        </a>
+<section class="block " id="experience-summary" aria-labelledby="experience-summary-title">
+  <h2 class="block-title" id="experience-summary-title">Experience</h2>
+  
+  <ul class="rows rows-compact"><li class="row"><div class="row-meta">Oct 2025 – present</div><div class="row-body"><p><a href="/experience/#meta-empires">AI Engineer &amp; Co-Founder</a>, Meta Empires</p></div></li><li class="row"><div class="row-meta">Oct 2023 – present</div><div class="row-body"><p><a href="/experience/#layout-intl">Technical Integration Engineer</a>, Layout Intl</p></div></li><li class="row"><div class="row-meta">Oct 2021 – Sep 2023</div><div class="row-body"><p><a href="/experience/#spacetech">Software Engineer</a>, SpaceTech</p></div></li></ul>
+  <p class="more"><a href="/experience/">Full experience, education and volunteering</a></p>
+</section>
 
-        <a href="https://www.electromall.net/en" target="_blank" rel="noreferrer" class="portfolio-card">
-          <div class="portfolio-top">
-            <div>
-              <div class="portfolio-name">ElectroMall</div>
-              <div class="portfolio-domain">electromall.net</div>
-            </div>
-            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
-          </div>
-          <div class="portfolio-desc">E-commerce retailer for electronics, mobiles, computers, and home appliances, with fast delivery and product warranty.</div>
-        </a>
 
-        <a href="https://www.teknagroupintl.com/" target="_blank" rel="noreferrer" class="portfolio-card">
-          <div class="portfolio-top">
-            <div>
-              <div class="portfolio-name">Tekna Group</div>
-              <div class="portfolio-domain">teknagroupintl.com</div>
-            </div>
-            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
-          </div>
-          <div class="portfolio-desc">Beirut-based luxury furniture brand—custom kitchens, wardrobes, bathroom vanities, surfaces, and climate solutions.</div>
-        </a>
+<section class="block " id="security-research" aria-labelledby="security-research-title">
+  <h2 class="block-title" id="security-research-title">Security research</h2>
+  
+  <ul class="rows rows-compact"><li class="row"><div class="row-meta"><span class="badge badge-sev badge-sev-unrated">Unrated</span></div><div class="row-body"><p><a href="/security/x-group-chat-membership-enumeration/">X group chat membership enumeration flaw</a>. Former group chat membership could still be used to infer whether a target user remained inside the chat. <span class="quiet">Reported.</span></p></div></li></ul>
+  <p class="more"><a href="/security/">Security findings, practice and study</a></p>
+</section>
 
-        <a href="https://maisonvertelb.com" target="_blank" rel="noreferrer" class="portfolio-card">
-          <div class="portfolio-top">
-            <div>
-              <div class="portfolio-name">Maison Verte</div>
-              <div class="portfolio-domain">maisonvertelb.com</div>
-            </div>
-            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
-          </div>
-          <div class="portfolio-desc">Brand and product website for a Lebanese business.</div>
-        </a>
 
-        <a href="https://www.xiomlab.com/" target="_blank" rel="noreferrer" class="portfolio-card">
-          <div class="portfolio-top">
-            <div>
-              <div class="portfolio-name">Xiom Labs</div>
-              <div class="portfolio-domain">xiomlab.com</div>
-            </div>
-            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
-          </div>
-          <div class="portfolio-desc">Web design studio delivering clean, fast, modern websites for real businesses—without the agency price tag or the wait.</div>
-        </a>
+<section class="block " id="recent-updates" aria-labelledby="recent-updates-title">
+  <h2 class="block-title" id="recent-updates-title">Recent updates</h2>
+  
+  <ul class="rows rows-compact"><li class="row">
+  <div class="row-meta"><time datetime="2026-05">May 2026</time><span class="row-meta-sub">Credential</span></div>
+  <div class="row-body"><p>Earned Certified in Cybersecurity (CC) from ISC2. <a class="ref" href="/certifications/#cybersecurity">Details</a></p></div>
+</li><li class="row">
+  <div class="row-meta"><time datetime="2026-05">May 2026</time><span class="row-meta-sub">Credential</span></div>
+  <div class="row-body"><p>Earned Fortinet Certified Associate in Cybersecurity. <a class="ref" href="/certifications/#cybersecurity">Details</a></p></div>
+</li><li class="row">
+  <div class="row-meta"><time datetime="2026-04">Apr 2026</time><span class="row-meta-sub">Credential</span></div>
+  <div class="row-body"><p>Earned Fortinet Certified Fundamentals in Cybersecurity. <a class="ref" href="/certifications/#cybersecurity">Details</a></p></div>
+</li><li class="row">
+  <div class="row-meta"><time datetime="2025-10">Oct 2025</time><span class="row-meta-sub">Professional</span></div>
+  <div class="row-body"><p>Co-founded Meta Empires and began leading engineering on Hala AI. <a class="ref" href="/projects/hala-ai/">Project</a></p></div>
+</li><li class="row">
+  <div class="row-meta"><time datetime="2025">2025</time><span class="row-meta-sub">Education</span></div>
+  <div class="row-body"><p>Started the Postgraduate Diploma in Cybersecurity at the American University of Beirut. <a class="ref" href="/experience/#education">Details</a></p></div>
+</li></ul>
+  <p class="more"><a href="/updates/">All updates</a> <span class="quiet">or follow the <a href="/feed.xml">RSS feed</a></span></p>
+</section>
+</main>
 
-        <a href="https://tryhala.ai" target="_blank" rel="noreferrer" class="portfolio-card">
-          <div class="portfolio-top">
-            <div>
-              <div class="portfolio-name">Hala AI</div>
-              <div class="portfolio-domain">tryhala.ai</div>
-            </div>
-            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
-          </div>
-          <div class="portfolio-desc">AI communications platform deploying voice agents that handle inbound and outbound calls 24/7 across voice, text, and WhatsApp.</div>
-        </a>
-
-        <a href="https://metaempires.com" target="_blank" rel="noreferrer" class="portfolio-card">
-          <div class="portfolio-top">
-            <div>
-              <div class="portfolio-name">MetaEmpires</div>
-              <div class="portfolio-domain">metaempires.com</div>
-            </div>
-            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
-          </div>
-          <div class="portfolio-desc">Studio building AI products for real business workflows.</div>
-        </a>
-
-        <a href="https://staxsai.com" target="_blank" rel="noreferrer" class="portfolio-card">
-          <div class="portfolio-top">
-            <div>
-              <div class="portfolio-name">StaxAI</div>
-              <div class="portfolio-domain">staxsai.com</div>
-            </div>
-            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Live</span>
-          </div>
-          <div class="portfolio-desc">A unified interface consolidating access to multiple AI models—ChatGPT, Claude, and more—in one workspace.</div>
-        </a>
-
-        <div class="portfolio-card offline">
-          <div class="portfolio-top">
-            <div>
-              <div class="portfolio-name">AlSayad</div>
-              <div class="portfolio-domain">alsayad.com</div>
-            </div>
-            <span class="portfolio-live"><span class="portfolio-live-dot"></span>Offline</span>
-          </div>
-          <div class="portfolio-desc">Client website—currently offline. Available on request.</div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience">
-      <div class="section-header">
-        <span class="section-num">04</span>
-        <h2>Experience & Focus</h2>
-      </div>
-      <div class="exp-list">
-        <div class="exp-item">
-          <div class="exp-title">Engineering</div>
-          <div class="exp-desc">I architect and ship full-stack systems with an emphasis on speed, maintainability, and production-grade clarity.</div>
-        </div>
-        <div class="exp-item">
-          <div class="exp-title">AI & Automation</div>
-          <div class="exp-desc">I build AI-driven workflows and automation layers that remove human bottlenecks, accelerate response loops, and create measurable operational advantage.</div>
-        </div>
-        <div class="exp-item">
-          <div class="exp-title">Security Mindset</div>
-          <div class="exp-desc">I design with security and failure tolerance upfront—treating reliability, access control, and system exposure as core architecture, not cleanup work.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Research -->
-    <section id="research">
-      <div class="section-header">
-        <span class="section-num">05</span>
-        <h2>Research</h2>
-      </div>
-      <div class="research-body">
-        <a href="https://hackerone.com/bugs?subject=user&report_id=3620487&view=all&substates%5B%5D=editing&substates%5B%5D=new&substates%5B%5D=triaged&substates%5B%5D=needs-more-info&substates%5B%5D=resolved&substates%5B%5D=informative&substates%5B%5D=not-applicable&substates%5B%5D=duplicate&substates%5B%5D=spam&substates%5B%5D=retesting&substates%5B%5D=pending-program-review&reported_to_team=&text_query=&program_states%5B%5D=2&program_states%5B%5D=3&program_states%5B%5D=4&program_states%5B%5D=5&sort_type=latest_activity&sort_direction=descending&limit=25&page=1" target="_blank" rel="noreferrer" class="research-coming" style="display:flex; flex-direction:column; align-items:flex-start; gap:6px; text-decoration:none;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span class="research-coming-dot"></span>
-            X Group Chat Membership Enumeration Flaw
-          </div>
-          <div style="padding-left:13px; font-size:12px; line-height:1.7; color: var(--muted); text-transform:none; letter-spacing:0.02em;">
-            Former group chat membership could still be used to infer whether a target user remained inside the chat.
-          </div>
-          <div class="research-keywords">
-            <span class="research-keyword">Security</span>
-          </div>
-        </a>
-        <div class="research-coming">
-          <span class="research-coming-dot"></span>
-          Publishing research soon...
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <div class="section-header">
-        <span class="section-num">06</span>
-        <h2>Contact</h2>
-      </div>
-      <div class="contact-body">
-        <p>For serious conversations around engineering, AI systems, product architecture, or building ambitious things—reach out through GitHub or LinkedIn.</p>
-        <div class="contact-links">
-          <a href="https://github.com/danielmadii" target="_blank" rel="noreferrer" class="contact-link">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-          </a>
-          <a href="https://www.linkedin.com/in/danielmadi/" target="_blank" rel="noreferrer" class="contact-link">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
-          </a>
-          <a href="https://x.com/danielmadii" target="_blank" rel="noreferrer" class="contact-link">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.213 5.567 5.95-5.567zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            X
-          </a>
-        </div>
-      </div>
-
-      <div class="status-bar">
-        <span>© 2026 Daniel Madi. All rights reserved.</span>
-      </div>
-    </section>
-
-  </main>
-</div>
-
-<script>
-  const sections = document.querySelectorAll('section[id]');
-  const navItems = document.querySelectorAll('.nav-item');
-  const aside = document.getElementById('site-aside');
-  const mobileToggle = document.getElementById('mobile-menu-toggle');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navItems.forEach(item => {
-          item.classList.toggle('active', item.dataset.section === id);
-        });
-      }
-    });
-  }, { threshold: 0.2 });
-
-  sections.forEach(s => observer.observe(s));
-
-  if (mobileToggle && aside) {
-    mobileToggle.addEventListener('click', () => {
-      const isOpen = aside.classList.toggle('mobile-open');
-      mobileToggle.setAttribute('aria-expanded', String(isOpen));
-      // Swap icon between hamburger and X
-      mobileToggle.querySelector('svg path').setAttribute('d',
-        isOpen ? 'M6 6l12 12M6 18L18 6' : 'M4 7h16M4 12h16M4 17h16'
-      );
-    });
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-          aside.classList.remove('mobile-open');
-          mobileToggle.setAttribute('aria-expanded', 'false');
-          mobileToggle.querySelector('svg path').setAttribute('d', 'M4 7h16M4 12h16M4 17h16');
-        }
-      });
-    });
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) {
-        aside.classList.remove('mobile-open');
-        mobileToggle.setAttribute('aria-expanded', 'false');
-        mobileToggle.querySelector('svg path').setAttribute('d', 'M4 7h16M4 12h16M4 17h16');
-      }
-    });
-  }
-</script>
+<footer class="colophon">
+  <div class="colophon-inner">
+    <p>© 2026 Daniel Madi</p>
+    <ul class="colophon-links">
+      <li><a href="mailto:danielmadi96@gmail.com">Email</a></li>
+      <li><a href="https://github.com/danielmadii">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/danielmadi/">LinkedIn</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
+    </ul>
+    <p class="colophon-build">Static HTML generated from JSON and Markdown in <a href="https://github.com/danielmadii/danielmadii.github.io">the site repository</a>. Built <time datetime="2026-11-04T15:54:06.447Z">4 November 2026</time>.</p>
+  </div>
+</footer>
 <script src="https://api.tryhala.ai/widget.js" data-instance-id="inst_1782114091978" async></script>
 </body>
 </html>

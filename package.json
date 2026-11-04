@@ -1,0 +1,15 @@
+{
+  "name": "danielmadii.github.io",
+  "private": true,
+  "type": "module",
+  "description": "Source and build for danielmadii.github.io",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs",
+    "cv:pdf": "node scripts/cv-pdf.mjs"
+  },
+  "devDependencies": {
+    "marked": "^15.0.0"
+  },
+  "engines": { "node": ">=20" }
+}

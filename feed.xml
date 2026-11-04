@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Daniel Madi: updates</title>
+    <link>https://danielmadii.github.io/updates/</link>
+    <atom:link href="https://danielmadii.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Roles, projects, credentials and writing from Daniel Madi.</description>
+    <language>en</language>
+    <lastBuildDate>Wed, 04 Nov 2026 15:54:06 GMT</lastBuildDate>
+    <item>
+      <title>Earned Certified in Cybersecurity (CC) from ISC2.</title>
+      <link>https://danielmadii.github.io/certifications/#cybersecurity</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2026-05-00-earned-certified-in-cybersecurity-cc-from-isc2-</guid>
+      <pubDate>Fri, 01 May 2026 00:00:00 GMT</pubDate>
+      <category>Credential</category>
+    </item>
+    <item>
+      <title>Earned Fortinet Certified Associate in Cybersecurity.</title>
+      <link>https://danielmadii.github.io/certifications/#cybersecurity</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2026-05-00-earned-fortinet-certified-associate-in-cybersecurity-</guid>
+      <pubDate>Fri, 01 May 2026 00:00:00 GMT</pubDate>
+      <category>Credential</category>
+    </item>
+    <item>
+      <title>Earned Fortinet Certified Fundamentals in Cybersecurity.</title>
+      <link>https://danielmadii.github.io/certifications/#cybersecurity</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2026-04-00-earned-fortinet-certified-fundamentals-in-cybersecurity-</guid>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 GMT</pubDate>
+      <category>Credential</category>
+    </item>
+    <item>
+      <title>Co-founded Meta Empires and began leading engineering on Hala AI.</title>
+      <link>https://danielmadii.github.io/projects/hala-ai/</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2025-10-00-co-founded-meta-empires-and-began-leading-engineering-on-hal</guid>
+      <pubDate>Wed, 01 Oct 2025 00:00:00 GMT</pubDate>
+      <category>Professional</category>
+    </item>
+    <item>
+      <title>Started the Postgraduate Diploma in Cybersecurity at the American University of Beirut.</title>
+      <link>https://danielmadii.github.io/experience/#education</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2025-00-00-started-the-postgraduate-diploma-in-cybersecurity-at-the-ame</guid>
+      <pubDate>Wed, 01 Jan 2025 00:00:00 GMT</pubDate>
+      <category>Education</category>
+    </item>
+    <item>
+      <title>Published a helpdesk ticketing system in PHP and MySQL.</title>
+      <link>https://danielmadii.github.io/projects/helpdesk-ticketing/</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2023-11-00-published-a-helpdesk-ticketing-system-in-php-and-mysql-</guid>
+      <pubDate>Wed, 01 Nov 2023 00:00:00 GMT</pubDate>
+      <category>Open source</category>
+    </item>
+    <item>
+      <title>Joined Layout Intl as Technical Integration Engineer.</title>
+      <link>https://danielmadii.github.io/experience/#layout-intl</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2023-10-00-joined-layout-intl-as-technical-integration-engineer-</guid>
+      <pubDate>Sun, 01 Oct 2023 00:00:00 GMT</pubDate>
+      <category>Professional</category>
+    </item>
+    <item>
+      <title>Published a guide to installing Kali Linux on Android without root.</title>
+      <link>https://github.com/danielmadii/Kali-Linux-Android-noroot</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2023-09-00-published-a-guide-to-installing-kali-linux-on-android-withou</guid>
+      <pubDate>Fri, 01 Sep 2023 00:00:00 GMT</pubDate>
+      <category>Writing</category>
+    </item>
+    <item>
+      <title>Earned the Google Cybersecurity Professional Certificate.</title>
+      <link>https://danielmadii.github.io/certifications/#cybersecurity</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2023-09-00-earned-the-google-cybersecurity-professional-certificate-</guid>
+      <pubDate>Fri, 01 Sep 2023 00:00:00 GMT</pubDate>
+      <category>Credential</category>
+    </item>
+    <item>
+      <title>Released a GitHub username availability checker in Python.</title>
+      <link>https://danielmadii.github.io/projects/github-username-checker/</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2023-09-00-released-a-github-username-availability-checker-in-python-</guid>
+      <pubDate>Fri, 01 Sep 2023 00:00:00 GMT</pubDate>
+      <category>Open source</category>
+    </item>
+    <item>
+      <title>Started PetFindr, an open-source web app for reuniting lost pets with their owners.</title>
+      <link>https://danielmadii.github.io/projects/petfindr/</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2023-06-00-started-petfindr-an-open-source-web-app-for-reuniting-lost-p</guid>
+      <pubDate>Thu, 01 Jun 2023 00:00:00 GMT</pubDate>
+      <category>Open source</category>
+    </item>
+    <item>
+      <title>Completed a Bachelor&#39;s in Computer Science for Business Applications at Lebanese University.</title>
+      <link>https://danielmadii.github.io/experience/#education</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2023-00-00-completed-a-bachelor-s-in-computer-science-for-business-appl</guid>
+      <pubDate>Sun, 01 Jan 2023 00:00:00 GMT</pubDate>
+      <category>Education</category>
+    </item>
+    <item>
+      <title>Joined SpaceTech as Software Engineer.</title>
+      <link>https://danielmadii.github.io/experience/#spacetech</link>
+      <guid isPermaLink="false">https://danielmadii.github.io/updates/#2021-10-00-joined-spacetech-as-software-engineer-</guid>
+      <pubDate>Fri, 01 Oct 2021 00:00:00 GMT</pubDate>
+      <category>Professional</category>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security — Daniel Madi</title>
+<meta name="description" content="Security findings reported by Daniel Madi, with evidence levels, plus production security practice and cybersecurity study.">
+<link rel="canonical" href="https://danielmadii.github.io/security/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101213">
+<script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.dataset.theme=t;}catch(e){}})();</script>
+<link rel="preload" href="/assets/fonts/literata-opsz.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css?v=93df7be2b9">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="Daniel Madi: updates" href="/feed.xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Daniel Madi">
+<meta property="og:title" content="Security">
+<meta property="og:description" content="Security findings reported by Daniel Madi, with evidence levels, plus production security practice and cybersecurity study.">
+<meta property="og:url" content="https://danielmadii.github.io/security/">
+<meta property="og:image" content="https://danielmadii.github.io/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Daniel Madi: AI, infrastructure and security engineering">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@danielmadii">
+<script src="/assets/js/site.js?v=85ece409c8" defer></script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="wordmark" href="/">Daniel Madi</a>
+    <div class="masthead-tools">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
+      <button class="theme-toggle" type="button" hidden>
+        <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16"><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg>
+        <span class="theme-toggle-label">Dark theme</span>
+      </button>
+    </div>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="/">Overview</a></li><li><a href="/experience/">Experience</a></li><li><a href="/projects/">Projects</a></li><li><a href="/expertise/">Expertise</a></li><li><a href="/security/" aria-current="page">Security</a></li><li><a href="/writing/">Writing</a></li><li><a href="/certifications/">Certifications</a></li><li><a href="/updates/">Updates</a></li><li><a href="/cv/">CV</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main" class="page" tabindex="-1">
+
+
+<header class="page-header">
+  
+  <h1>Security</h1>
+  <div class="page-intro"><p>Security findings I have reported, the security work I do on production systems, and what I&#39;m studying.</p><p>Every finding carries an evidence level, so a reported issue is never presented as a confirmed one, and independent research is never presented as either.</p></div>
+</header>
+
+<section class="block " id="findings" aria-labelledby="findings-title">
+  <h2 class="block-title" id="findings-title">Findings</h2>
+  
+  <div class="table-wrap"><table class="findings">
+    <thead><tr><th scope="col">Finding</th><th scope="col">Severity</th><th scope="col">Evidence</th><th scope="col">Disclosure</th></tr></thead>
+    <tbody><tr><th scope="row"><a href="/security/x-group-chat-membership-enumeration/">X group chat membership enumeration flaw</a><span class="cell-sub">X (formerly Twitter) group direct messages</span></th><td><span class="badge badge-sev badge-sev-unrated">Unrated</span></td><td><span class="badge badge-evidence badge-evidence-reported">Reported</span></td><td>Reported through HackerOne</td></tr></tbody>
+  </table></div>
+</section>
+
+<section class="block " id="evidence-levels" aria-labelledby="evidence-levels-title">
+  <h2 class="block-title" id="evidence-levels-title">Evidence levels</h2>
+  
+  <dl class="legend"><div class="legend-item legend-unused"><dt><span class="badge badge-evidence badge-evidence-confirmed">Confirmed</span></dt><dd>Acknowledged or fixed by the affected vendor.</dd></div><div class="legend-item"><dt><span class="badge badge-evidence badge-evidence-reported">Reported</span></dt><dd>Submitted to the vendor through a disclosure program; no public outcome yet.</dd></div><div class="legend-item legend-unused"><dt><span class="badge badge-evidence badge-evidence-research">Independent research</span></dt><dd>My own investigation, not submitted to a vendor.</dd></div><div class="legend-item legend-unused"><dt><span class="badge badge-evidence badge-evidence-analysis">Theoretical analysis</span></dt><dd>Reasoned analysis without a working demonstration.</dd></div></dl>
+  <p class="quiet small">Severity follows the usual scale: <span class="badge badge-sev badge-sev-critical">Critical</span> <span class="badge badge-sev badge-sev-high">High</span> <span class="badge badge-sev badge-sev-medium">Medium</span> <span class="badge badge-sev badge-sev-low">Low</span> <span class="badge badge-sev badge-sev-informational">Informational</span> <span class="badge badge-sev badge-sev-unrated">Unrated</span>. A finding stays unrated until a CVSS score or vendor rating is available.</p>
+</section>
+
+<section class="block " id="practice" aria-labelledby="practice-title">
+  <h2 class="block-title" id="practice-title">Security in practice</h2>
+  
+  <ul class="bullets"><li>Hardened production Linux servers at Layout Intl with SSH policy controls, MFA enforcement, role-based access controls, security scripting and log rotation.</li><li>Implemented and validated disaster-recovery procedures, including database backups, VM snapshots and restore testing.</li><li>Designed Hala AI&#39;s tenancy model around workspace-level isolation and encrypted tenant credentials.</li></ul><p class="evidence"><span class="evidence-label">Where it shows up:</span> <a href="/experience/#layout-intl">Layout Intl</a>, <a href="/projects/hala-ai/">Hala AI</a></p>
+</section>
+
+<section class="block " id="study" aria-labelledby="study-title">
+  <h2 class="block-title" id="study-title">Study</h2>
+  
+  <ul class="bullets">
+    <li>Postgraduate Diploma in Cybersecurity, American University of Beirut, in progress: network and systems security, ethical hacking, threat analysis and defensive operations.</li>
+    <li>ISC2 Certified in Cybersecurity, Fortinet Certified Associate and Fortinet Certified Fundamentals in Cybersecurity, and the Google Cybersecurity Professional Certificate. <a href="/certifications/#cybersecurity">Credentials</a></li>
+    <li><a href="https://github.com/danielmadii/Kali-Linux-Android-noroot">A guide to running Kali Linux on Android without root</a>.</li>
+  </ul>
+</section>
+
+<section class="block " id="policy" aria-labelledby="policy-title">
+  <h2 class="block-title" id="policy-title">How findings are published</h2>
+  
+  <p>A finding appears here only after it has been reported to the affected vendor. Reproduction details for unresolved issues are withheld, and nothing from client systems or private infrastructure is published.</p>
+</section>
+</main>
+
+<footer class="colophon">
+  <div class="colophon-inner">
+    <p>© 2026 Daniel Madi</p>
+    <ul class="colophon-links">
+      <li><a href="mailto:danielmadi96@gmail.com">Email</a></li>
+      <li><a href="https://github.com/danielmadii">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/danielmadi/">LinkedIn</a></li>
+      <li><a href="/feed.xml">RSS</a></li>
+    </ul>
+    <p class="colophon-build">Static HTML generated from JSON and Markdown in <a href="https://github.com/danielmadii/danielmadii.github.io">the site repository</a>. Built <time datetime="2026-11-04T15:54:06.447Z">4 November 2026</time>.</p>
+  </div>
+</footer>
+<script src="https://api.tryhala.ai/widget.js" data-instance-id="inst_1782114091978" async></script>
+</body>
+</html>
