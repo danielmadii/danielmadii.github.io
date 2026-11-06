@@ -2,6 +2,7 @@ import { html, raw, join, esc, isExternal } from "./lib/html.mjs";
 import { inline, markdown, plain } from "./lib/markdown.mjs";
 import { formatDate, formatRange, sortKey, toDate, rfc822, isoDate } from "./lib/dates.mjs";
 import { blocks } from "./lib/diagrams.mjs";
+import { icon, iconFor, linkIcon } from "./lib/icons.mjs";
 import {
   pageHeader, section, facts, inlineList, evidenceLinks, filterBar, emptyState,
   severityBadge, evidenceBadge, picture, time, SEVERITY_NAMES,
@@ -9,75 +10,146 @@ import {
 
 const byId = (list) => Object.fromEntries(list.map((x) => [x.id, x]));
 const searchText = (...parts) => parts.flat().filter(Boolean).map((p) => plain(p)).join(" ").toLowerCase();
-const projectKind = (p) => [p.type, p.status].filter(Boolean).join(", ");
 
 /* ---------- Overview ---------- */
+
+const homeSection = ({ id, eyebrow, title, lead, body, more }) => html`
+<section class="home-section reveal" id="${id}" aria-labelledby="${id}-title">
+  <header class="home-section-head">
+    ${eyebrow ? html`<p class="eyebrow">${eyebrow}</p>` : ""}
+    <h2 class="home-section-title" id="${id}-title">${title}</h2>
+    ${lead ? html`<p class="home-section-lead">${lead}</p>` : ""}
+  </header>
+  ${body}
+  ${more ? html`<p class="more-link"><a href="${more.href}">${more.label} ${icon("arrow")}</a></p>` : ""}
+</section>`;
+
+/* Headline numbers, all counted from content/ so they stay true as it changes. */
+const stats = (ctx, c) => {
+  const firstJob = Math.min(...c.experience.work.map((e) => toDate(e.start).getTime()));
+  const years = Math.floor((ctx.buildDate.getTime() - firstJob) / (365.25 * 864e5));
+  const liveProducts = c.projects.filter((p) => p.status === "Live" && !p.sites).length;
+  const liveSites = c.projects.flatMap((p) => p.sites || []).filter((s) => s.href).length;
+  const earned = c.certifications.credentials.filter((cr) => !cr.in_progress && cr.kind !== "training").length;
+  const tech = c.skills.groups.flatMap((g) => g.items || g.subgroups.flatMap((s) => s.items)).length;
+  return [
+    { value: `${years}+`, label: "years shipping software" },
+    { value: liveProducts + liveSites, label: "live products and client sites" },
+    { value: earned, label: "security and AI credentials earned" },
+    { value: tech, label: "technologies in production use" },
+  ];
+};
 
 export const overview = (ctx, c) => {
   const { site } = c;
   const featured = c.projects.filter((p) => p.featured);
   const evidence = byId(c.security.evidence_levels);
+  const [lede, ...about] = site.intro;
+  const cv = site.links.find((l) => /\.pdf$/.test(l.href));
 
   const main = html`
-<section class="intro" aria-labelledby="intro-title">
-  <div class="intro-portrait">
-    ${picture({ src: site.portrait.src, alt: site.portrait.alt, width: 480, height: 480, cls: "portrait", loading: "eager" })}
+<section class="hero" aria-labelledby="intro-title">
+  <div class="hero-text">
+    <p class="status-pill"><span class="status-dot" aria-hidden="true"></span>${inline(site.currently[0].text)}</p>
+    <h1 id="intro-title" class="hero-name">${site.name}</h1>
+    <p class="hero-tag">AI, infrastructure and security engineering.</p>
+    <p class="hero-lede">${inline(lede)}</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="/projects/">See my work ${icon("arrow")}</a>
+      ${cv ? html`<a class="button button-secondary" href="${cv.href}">${icon("download")} Download CV</a>` : ""}
+    </div>
+    <ul class="social-links" aria-label="Profiles">${site.links.filter((l) => l !== cv).map(
+      (l) => html`<li><a href="${l.href}" aria-label="${l.label}" title="${l.label}">${icon(linkIcon(l.label, l.href))}</a></li>`
+    )}</ul>
   </div>
-  <div class="intro-text">
-    <h1 id="intro-title" class="intro-name">${site.name}</h1>
-    <p class="intro-role">AI, infrastructure and security engineering</p>
-    <div class="lede">${site.intro.map((p) => html`<p>${inline(p)}</p>`)}</div>
-    <ul class="profile-links">${site.links.map((l) => html`<li><a href="${l.href}">${l.label}</a></li>`)}</ul>
+  <div class="hero-portrait">
+    ${picture({ src: site.portrait.src, alt: site.portrait.alt, width: 480, height: 480, cls: "portrait", loading: "eager" })}
   </div>
 </section>
 
-${section({
-  id: "currently",
-  title: "Currently",
-  body: html`<ul class="rows rows-compact">${site.currently.map(
-    (item) => html`<li class="row"><div class="row-meta">${item.since ? html`Since ${time(item.since)}` : "In progress"}</div><div class="row-body"><p>${inline(item.text)}</p></div></li>`
+<ul class="stats reveal" aria-label="At a glance">${stats(ctx, c).map(
+  (s) => html`<li class="stat"><span class="stat-value">${s.value}</span><span class="stat-label">${s.label}</span></li>`
+)}</ul>
+
+${homeSection({
+  id: "about",
+  eyebrow: "About",
+  title: "Engineering that holds up in production.",
+  body: html`<div class="about-grid">
+    <div class="about-text">${about.map((p) => html`<p>${inline(p)}</p>`)}</div>
+    <aside class="card now-card" aria-labelledby="now-title">
+      <h3 class="card-eyebrow" id="now-title">Right now</h3>
+      <ul class="now-list">${site.currently.map(
+        (item) => html`<li><span class="now-when">${item.since ? html`Since ${time(item.since)}` : "In progress"}</span><span>${inline(item.text)}</span></li>`
+      )}</ul>
+    </aside>
+  </div>`,
+})}
+
+${homeSection({
+  id: "domains",
+  eyebrow: "Capabilities",
+  title: "What I work on",
+  lead: "Each area links to the project or role where the work is documented.",
+  body: html`<ul class="bento">${site.domains.map(
+    (d) => html`<li class="card domain-card">
+      <span class="domain-icon">${icon(iconFor(d.name))}</span>
+      <h3 class="domain-name">${d.name}</h3>
+      <p class="domain-summary">${d.summary}</p>
+      ${d.evidence && d.evidence.length ? html`<p class="domain-links">${join(d.evidence.map((l) => html`<a href="${l.href}">${l.label}</a>`), " ")}</p>` : ""}
+    </li>`
   )}</ul>`,
 })}
 
-${section({
-  id: "domains",
-  title: "What I work on",
-  body: html`<dl class="domains">${site.domains.map(
-    (d) => html`<div class="domain"><dt>${d.name}</dt><dd><p>${d.summary}</p>${evidenceLinks(d.evidence, "See")}</dd></div>`
-  )}</dl>`,
-})}
-
-${section({
+${homeSection({
   id: "selected-projects",
-  title: "Selected projects",
-  body: html`<ul class="rows">${featured.map((p) => projectRow(p))}</ul>
-  <p class="more"><a href="/projects/">All projects</a></p>`,
+  eyebrow: "Selected work",
+  title: "Projects",
+  body: html`<ul class="project-grid">${featured.map((p) => projectCard(p))}</ul>`,
+  more: { href: "/projects/", label: "All projects" },
 })}
 
-${section({
+${homeSection({
   id: "experience-summary",
+  eyebrow: "Career",
   title: "Experience",
-  body: html`<ul class="rows rows-compact">${c.experience.work.map(
-    (e) => html`<li class="row"><div class="row-meta">${formatRange(e.start, e.end)}</div><div class="row-body"><p><a href="/experience/#${e.id}">${e.role}</a>, ${e.organization}</p></div></li>`
-  )}</ul>
-  <p class="more"><a href="/experience/">Full experience, education and volunteering</a></p>`,
+  body: html`<ol class="career">${c.experience.work.map(
+    (e) => html`<li class="career-item">
+      <span class="career-dot${e.end ? "" : " career-dot-live"}" aria-hidden="true"></span>
+      <p class="career-when">${formatRange(e.start, e.end)}</p>
+      <h3 class="career-role"><a href="/experience/#${e.id}">${e.role}</a></h3>
+      <p class="career-org">${e.organization}${e.location ? html` · ${e.location}` : ""}</p>
+      ${e.summary ? html`<p class="career-summary">${inline(e.summary)}</p>` : ""}
+    </li>`
+  )}</ol>`,
+  more: { href: "/experience/", label: "Full experience, education and volunteering" },
 })}
 
-${section({
-  id: "security-research",
-  title: "Security research",
-  body: html`<ul class="rows rows-compact">${c.security.findings.map(
-    (f) => html`<li class="row"><div class="row-meta">${severityBadge(f.severity)}</div><div class="row-body"><p><a href="/security/${f.slug}/">${f.title}</a>. ${f.summary} <span class="quiet">${evidence[f.evidence].name}.</span></p></div></li>`
-  )}</ul>
-  <p class="more"><a href="/security/">Security findings, practice and study</a></p>`,
-})}
+<div class="split reveal">
+  <section class="card split-card" id="security-research" aria-labelledby="security-research-title">
+    <p class="eyebrow">${icon("shield")} Security research</p>
+    <h2 class="split-title" id="security-research-title">Reported findings</h2>
+    <ul class="finding-list">${c.security.findings.map(
+      (f) => html`<li><p class="finding-badges">${severityBadge(f.severity)} ${evidenceBadge(evidence[f.evidence])}</p><h3 class="finding-title"><a href="/security/${f.slug}/">${f.title}</a></h3><p class="finding-summary">${f.summary}</p></li>`
+    )}</ul>
+    <p class="more-link"><a href="/security/">Findings, practice and study ${icon("arrow")}</a></p>
+  </section>
+  <section class="card split-card" id="recent-updates" aria-labelledby="recent-updates-title">
+    <p class="eyebrow">${icon("rss")} Updates</p>
+    <h2 class="split-title" id="recent-updates-title">Recently</h2>
+    <ul class="update-list">${c.updates.slice(0, 5).map((u) => html`<li><span class="update-when">${time(u.date)}</span><span>${inline(u.text)}</span></li>`)}</ul>
+    <p class="more-link"><a href="/updates/">All updates ${icon("arrow")}</a></p>
+  </section>
+</div>
 
-${section({
-  id: "recent-updates",
-  title: "Recent updates",
-  body: html`<ul class="rows rows-compact">${c.updates.slice(0, 5).map((u) => updateRow(u, c))}</ul>
-  <p class="more"><a href="/updates/">All updates</a> <span class="quiet">or follow the <a href="/feed.xml">RSS feed</a></span></p>`,
-})}`;
+<section class="cta reveal" aria-labelledby="cta-title">
+  <h2 class="cta-title" id="cta-title">Let's talk.</h2>
+  <p class="cta-lead">Email is the fastest way to reach me, about AI systems, integrations, infrastructure or security.</p>
+  <div class="hero-actions">
+    <a class="button button-primary" href="mailto:${site.email}">${icon("mail")} ${site.email}</a>
+    <a class="button button-secondary" href="https://www.linkedin.com/in/danielmadi/">${icon("linkedin")} LinkedIn</a>
+  </div>
+</section>`;
 
   const person = {
     "@context": "https://schema.org",
@@ -92,21 +164,22 @@ ${section({
     address: { "@type": "PostalAddress", addressCountry: "LB" },
     sameAs: site.links.filter((l) => /^https:/.test(l.href)).map((l) => l.href),
   };
-  return { path: "/", title: site.name, description: site.description, main, jsonld: [person, { "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: site.url + "/" }], ogType: "profile" };
+  return { path: "/", title: site.name, description: site.description, main, jsonld: [person, { "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: site.url + "/" }], ogType: "profile", bodyClass: "page-home" };
 };
 
-/* ---------- Rows shared between pages ---------- */
+/* ---------- Rows and cards shared between pages ---------- */
 
-const projectRow = (p, { filterable = false, headingLevel = 3 } = {}) => {
+const projectCard = (p, { filterable = false, headingLevel = 3 } = {}) => {
   const Tag = `h${headingLevel}`;
   const attrs = filterable ? raw(` data-filter-item data-cats="${esc(p.categories.join(" "))}" data-text="${esc(searchText(p.title, p.summary, p.type, p.stack, p.tags))}"`) : "";
-  return html`<li class="row"${attrs}>
-  <div class="row-meta">${p.period ? formatRange(p.period.start, p.period.end) : ""}</div>
-  <div class="row-body">
-    ${raw(`<${Tag} class="row-title">`)}<a href="/projects/${p.slug}/">${p.title}</a>${raw(`</${Tag}>`)}
-    <p class="row-kind">${projectKind(p)}</p>
-    <p>${p.summary}</p>
-    ${p.stack && p.stack.length ? html`<p class="row-stack">${p.stack.join(", ")}</p>` : ""}
+  const chips = (p.stack && p.stack.length ? p.stack : p.tags || []).slice(0, 6);
+  return html`<li class="card project-card"${attrs}>
+  <div class="project-body">
+    <p class="project-kicker">${p.status === "Live" ? html`<span class="live-dot"></span>Live · ` : ""}${p.type}${p.period ? html` · ${formatRange(p.period.start, p.period.end)}` : ""}</p>
+    ${raw(`<${Tag} class="project-title">`)}<a class="stretched" href="/projects/${p.slug}/">${p.title}</a>${raw(`</${Tag}>`)}
+    <p class="project-summary">${p.summary}</p>
+    ${chips.length ? html`<ul class="chips">${chips.map((s) => html`<li>${s}</li>`)}</ul>` : ""}
+    <p class="project-links"><span class="project-cta">${p.bodySource ? "Read the case study" : "Details"} ${icon("arrow")}</span>${p.links?.live ? html`<a class="lifted" href="${p.links.live}">Live site ${icon("external")}</a>` : ""}${p.links?.repo ? html`<a class="lifted" href="${p.links.repo}">${icon("github")} Source</a>` : ""}</p>
   </div>
 </li>`;
 };
@@ -222,10 +295,10 @@ ${pageHeader({
 })}
 <div class="filterable" data-filter-root="projects">
   ${filterBar({ scope: "projects", noun: "projects", categories: cats })}
-  <ul class="rows">${c.projects.map((p) => projectRow(p, { filterable: true, headingLevel: 2 }))}</ul>
+  <ul class="project-grid">${c.projects.map((p) => projectCard(p, { filterable: true, headingLevel: 2 }))}</ul>
   ${emptyState("projects", "projects")}
 </div>`;
-  return { path: "/projects/", title: "Projects", description: "Technical projects by Daniel Madi: AI products, voice and conversational systems, full-stack applications and client web platforms.", main };
+  return { path: "/projects/", title: "Projects", description: "Technical projects by Daniel Madi: AI products, voice and conversational systems, full-stack applications and client web platforms.", main, bodyClass: "page-wide" };
 };
 
 export const projectDetail = (ctx, c, p) => {

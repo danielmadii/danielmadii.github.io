@@ -21,7 +21,6 @@ const header = (path) => html`
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="masthead">
   <div class="masthead-inner">
-    <a class="wordmark" href="/">Daniel Madi</a>
     <div class="masthead-tools">
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu</button>
       <button class="theme-toggle" type="button" hidden>
@@ -70,9 +69,8 @@ ${html`<html lang="en">
 <link rel="canonical" href="${url}">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#101213">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
 <script>${raw(THEME_BOOT)}</script>
-<link rel="preload" href="/assets/fonts/literata-opsz.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${ctx.assets.css}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
@@ -98,7 +96,6 @@ ${header(path)}
 ${main}
 </main>
 ${footer(ctx)}
-<script src="https://api.tryhala.ai/widget.js" data-instance-id="inst_1782114091978" async></script>
 </body>
 </html>`}
 `;
